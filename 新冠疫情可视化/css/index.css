@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 24rem;
+  transform: scale(0.95, 0.95);
+}
+header {
+  position: relative;
+  width: 24rem;
+  height: 0.975rem;
+  color: #ffffff;
+  background: url('../img/header/title.png') no-repeat center center;
+  background-size: 100% 100%;
+}
+header h1 {
+  text-align: center;
+  height: 0.975rem;
+  line-height: 0.8125rem;
+  font-size: 0.5rem;
+}
+header::after {
+  content: '疫情数据展示';
+  position: absolute;
+  top: 0.35rem;
+  left: 0.675rem;
+}
+header .showTime {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.3125rem;
+  font-size: 0.275rem;
+  color: #fff;
+}
+.mainBox {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  background-color: black;
+  padding: 0.4375rem 0.6875rem;
+}
+.mainBox .leftBox {
+  flex: 3;
+  background-color: pink;
+}
+.mainBox .middleBox {
+  flex: 5;
+  background-color: skyblue;
+}
+.mainBox .rightBox {
+  flex: 3;
+  background-color: greenyellow;
+}

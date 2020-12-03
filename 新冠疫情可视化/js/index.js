@@ -35,32 +35,42 @@ var myChart_lt_one = echarts.init(document.getElementById('chart_lt_one'));
                 lineStyle: {
                     color: 'rgba(0,0,0,0.2)',
                     width: 1,
-                    type: 'solid'
+                    type: 'solid',
                 }
             }
         },
 
         legend: {
-            data: ['现有确诊', '现有治愈', '现有死亡']
+            data: ['现有确诊', '现有治愈', '现有死亡'],
+            textStyle: {
+                color: '#fff',
+            },
         },
 
         singleAxis: {
             left: "5%",
             right: "5%",
             bottom: "18%",
-            axisTick: {},
-            axisLabel: {},
+            top: "10%",
+            axisTick: {
+                color: '#fff',
+            },
+            axisLabel: {
+                color: '#fff',
+            },
             type: 'time',
             axisPointer: {
                 animation: true,
                 label: {
-                    show: true
+                    show: true,
+                    color: '#fff',
                 }
             },
             splitLine: {
                 show: true,
                 lineStyle: {
                     type: 'dashed',
+                    color: '#fff',
                     opacity: 0.2
                 }
             }
@@ -168,293 +178,234 @@ var myChart_lt_one = echarts.init(document.getElementById('chart_lt_one'));
 
 var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
 (function() {
-    var sData = [{
-        name: "大白",
-        value: "40000"
-    }, {
-        name: "长大",
-        value: "53000"
-    }, {
-        name: "杜洛克",
-        value: "40000"
-    }, {
-        name: "约克猪",
-        value: "10000"
-    }];
-    // var legendData1 = ["大白", "长大", "杜洛克", "约克猪"]
-    // var legendData2 = ["二元", "三元", "大长","PIC"]
+    var color = ['#FC4567', '#2F8DF4', '#C25EC4', '#325478']
 
-    var legendData1 = [];
-    var legendData2 = [];
-    for (var i = 0; i < sData.length; i++) {
-        var halfLength = Math.ceil(sData.length / 2);
-        var itemName = sData[i].name;
-        if (i < halfLength) {
-            legendData1.push(itemName)
-        } else {
-            legendData2.push(itemName)
-        }
-    }
-    var colorList = ['#4400CC', '#00AACC', '#9BBF30', '#E60000', ];
     option = {
-        backgroundColor: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 1,
-            y2: 1,
-            colorStops: [{
-                offset: 0,
-                color: '#000F44' // 0% 处的颜色
-            }, {
-                offset: 1,
-                color: '#000B3B' // 100% 处的颜色
-            }],
-            globalCoord: false // 缺省为 false
-        },
+        color: color,
+        // backgroundColor: '#0A173B',
         title: {
             text: '',
-            // text: '品种',
-            x: '50%',
-            y: 'center',
+            left: 'center',
+            top: '50%',
             textStyle: {
-                color: '#fff'
+                fontSize: 22,
+                color: '#fff',
+                fontWeight: 'normal'
             }
         },
         tooltip: {
-            trigger: 'item',
-            borderColor: 'rgba(255,255,255,.3)',
-            backgroundColor: 'rgba(13,5,30,.6)',
-            borderWidth: 1,
-            padding: 5,
-            formatter: function(parms) {
-                var str = parms.marker + "" + parms.data.name + "</br>" +
-                    "数量：" + parms.data.value + "头</br>" +
-                    "占比：" + parms.percent + "%";
-                return str;
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            right: 8,
+            top: 'center',
+            textStyle: {
+                color: '#fff',
+                fontSize: 8
             }
         },
-        legend: [{
-            type: "scroll",
-            orient: 'vertical',
-            icon: 'square',
-            right: '8%',
-            align: 'left',
-            top: 'center',
-            itemGap: 20,
-            // bottom:'50%',
-            textStyle: {
-                color: '#AAAAAA'
-            },
-            data: legendData1
-        }, {
-            type: "scroll",
-            orient: 'vertical',
-            icon: 'square',
-            right: '18%',
-            align: 'left',
-            top: 'center',
-            itemGap: 20,
-            // bottom:'50%',
-            textStyle: {
-                color: '#AAAAAA'
-            },
-            data: legendData2
-        }],
         series: [{
-                type: 'pie',
-                z: 4,
-                center: ['60%', '50%'],
-                radius: ['49%', '55%'],
-                clockwise: true,
-                avoidLabelOverlap: true,
-                hoverOffset: 15,
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return colorList[params.dataIndex]
-                        }
-                    }
-                },
-                label: {
-                    show: true,
-                    position: 'outside',
-                    formatter: '{a|{b}：{d}%}\n{hr|}',
-                    rich: {
-                        hr: {
-                            backgroundColor: 't',
-                            borderRadius: 3,
-                            width: 3,
-                            height: 3,
-                            padding: [3, 3, 0, -12]
-                        },
-                        a: {
-                            padding: [-30, 15, -20, 15]
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        length: 20,
-                        length2: 30,
-                        lineStyle: {
-                            width: 1
-                        }
-                    }
-                },
-                data: []
-            }, {
-                name: '第一层环',
+                //1
                 type: 'pie',
                 z: 5,
-                tooltip: {
-                    show: true
-                },
-                center: ['40%', '50%'],
-                radius: ['15%', '0%'],
-                hoverAnimation: false,
-                clockWise: false,
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return colorList[params.dataIndex]
-                        },
-                        opacity: 1,
-                        shadowBlur: 10
+                roseType: 'radius',
+                radius: ['10%', '40%'],
+                center: ['35%', '50%'],
+                data: [{
+                        value: 220,
+                        name: '社会组织'
+                    }, {
+                        value: 120,
+                        name: '事业单位'
                     },
-
-                },
-                //         itemStyle: {
-                //   opacity: 1,
-                //   shadowBlur: 20.5
-                // }
-                label: {
-                    show: false
-                },
-                data: sData
-            }, {
-                name: '第二层环',
-                type: 'pie',
-                z: 4,
-                tooltip: {
-                    show: true
-                },
-                center: ['40%', '50%'],
-                radius: ['25%', '15%'],
-                hoverAnimation: false,
-                clockWise: false,
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return colorList[params.dataIndex]
-                        },
-                        opacity: 1,
-                        shadowBlur: 10
-                    }
-                },
-                label: {
-                    show: false
-                },
-                data: sData
-            }, {
-                name: '第三层环',
-                type: 'pie',
-                z: 3,
-                tooltip: {
-                    show: true
-                },
-                center: ['40%', '50%'],
-                radius: ['35%', '25%'],
-                hoverAnimation: false,
-                clockWise: false,
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return colorList[params.dataIndex]
-                        },
-                        opacity: 1,
-                        shadowBlur: 10
-                    }
-                },
-                label: {
-                    show: false
-                },
-                data: sData
-            },
-            {
-                name: '第四层环',
-                type: 'pie',
-                z: 2,
-                tooltip: {
-                    show: true
-                },
-                center: ['40%', '50%'],
-                radius: ['45%', '35%'],
-                hoverAnimation: false,
-                clockWise: false,
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return colorList[params.dataIndex]
-                        },
-                        opacity: 1,
-                        shadowBlur: 10
+                    {
+                        value: 189,
+                        name: '工商企业登记注册'
                     },
-
-                },
+                    {
+                        value: 189,
+                        name: '工商企业'
+                    }
+                ],
                 label: {
                     show: false,
-                },
-                data: sData
-            },
-            {
-                name: '第四层环',
-                type: 'pie',
-                z: 1,
-                tooltip: {
-                    show: true
-                },
-                center: ['40%', '50%'],
-                radius: ['55%', '45%'],
-                hoverAnimation: false,
-                clockWise: false,
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return colorList[params.dataIndex]
-                        },
-                        opacity: 1,
-                        shadowBlur: 10
-                    },
 
                 },
-                label: {
-                    show: true,
-                    position: 'outside',
-                    formatter: '{a|{b}：{d}%}\n{hr|}',
-                    rich: {
-                        hr: {
-                            backgroundColor: 't',
-                            borderRadius: 3,
-                            width: 3,
-                            height: 3,
-                            padding: [3, 3, 0, -12]
-                        },
-                        a: {
-                            padding: [-30, 5, -20, 5]
-                        }
+                labelLine: {
+                    lineStyle: {
+                        color: '#fff'
                     }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    opacity: 1,
+
+                }
+            },
+            //2
+            {
+                type: 'pie',
+                z: 4,
+                roseType: 'radius',
+                radius: ['10%', '50%'],
+                center: ['35%', '50%'],
+                data: [{
+                        value: 220,
+                        name: '社会组织'
+                    }, {
+                        value: 120,
+                        name: '事业单位'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业登记注册'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业'
+                    }
+                ],
+                label: {
+                    show: false,
+
                 },
                 labelLine: {
-                    normal: {
-                        length: 10,
-                        length2: 20,
-                        lineStyle: {
-                            width: 1
-                        }
+                    lineStyle: {
+                        color: '#fff'
                     }
                 },
-                data: sData
+                itemStyle: {
+                    shadowBlur: 10,
+                    opacity: 1,
+
+                }
+            },
+            //3
+            {
+                type: 'pie',
+                z: 3,
+                roseType: 'radius',
+                radius: ['10%', '60%'],
+                center: ['35%', '50%'],
+                data: [{
+                        value: 220,
+                        name: '社会组织'
+                    }, {
+                        value: 120,
+                        name: '事业单位'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业登记注册'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业'
+                    }
+                ],
+                label: {
+                    show: false,
+
+                },
+                labelLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    opacity: 1,
+
+                }
+            },
+            //4
+            {
+                type: 'pie',
+                z: 2,
+                roseType: 'radius',
+                radius: ['10%', '70%'],
+                center: ['35%', '50%'],
+                data: [{
+                        value: 220,
+                        name: '社会组织'
+                    }, {
+                        value: 120,
+                        name: '事业单位'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业登记注册'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业'
+                    }
+                ],
+                label: {
+                    show: false,
+
+                },
+                labelLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    opacity: 1,
+
+                }
+            }, {
+                type: 'pie',
+                z: 1,
+                roseType: 'radius',
+                radius: ['10%', '80%'],
+                center: ['35%', '50%'],
+                data: [{
+                        value: 220,
+                        name: '社会组织'
+                    }, {
+                        value: 120,
+                        name: '事业单位'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业登记注册'
+                    },
+                    {
+                        value: 189,
+                        name: '工商企业'
+                    }
+                ],
+                label: {
+                    normal: {
+                        formatter: '{font|{c}}\n{hr|}\n{font|{d}%}',
+                        rich: {
+                            font: {
+                                fontSize: 8,
+                                padding: [5, 0],
+                                color: '#fff'
+                            },
+                            hr: {
+                                height: 0,
+                                borderWidth: 1,
+                                width: '100%',
+                                borderColor: '#fff'
+                            }
+                        }
+                    },
+                },
+                labelLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    opacity: 1,
+
+                }
             }
         ]
     };
@@ -463,5 +414,472 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
     // 4. 让图表跟随屏幕自动的去适应
     window.addEventListener("resize", function() {
         myChart_lt_two.resize();
+    });
+})();
+
+var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
+(function() {
+    // app.title = '堆叠条形图';
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
+                color: '#fff',
+            }
+        },
+        legend: {
+            data: ['A级门店', 'B级门店', 'C级门店', 'D级门店'],
+            textStyle: {
+                color: '#fff',
+            },
+        },
+        grid: {
+            left: '1%',
+            right: '4%',
+            bottom: '3%',
+            top: '15%',
+            containLabel: true
+        },
+        yAxis: {
+            type: 'value',
+            max: 1000,
+            axisLabel: {
+                color: '#fff'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                },
+            },
+        },
+        xAxis: {
+            type: 'category',
+            data: ['福建', '广州', '厦门', '南宁', '背景', '长沙', '重庆', '上海'],
+            axisLabel: {
+                color: '#fff'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                },
+            },
+        },
+        series: [{
+                name: 'A级门店',
+                type: 'bar',
+                stack: '总量',
+                barWidth: 15,
+                itemStyle: {
+                    normal: {
+                        color: '#06d3cd',
+                        barBorderRadius: [20, 20, 0, 0],
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        color: "#000",
+                        fontSize: 4
+                    }
+                },
+                z: 20,
+                data: [320, 302, 301, 334, 390, 330, 320, 320]
+            },
+            {
+                name: 'B级门店',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        color: '#ebe806',
+                        shadowBlur: [0, 0, 0, 40],
+                        shadowColor: '#ebe806',
+                        barBorderRadius: [20, 20, 0, 0],
+                        shadowOffsetY: 5,
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        color: "#000",
+                        fontSize: 4
+                    }
+                },
+                z: 15,
+                data: [120, 132, 101, 134, 90, 230, 210, 101]
+            },
+            {
+                name: 'C级门店',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        color: '#ff5624',
+                        barBorderRadius: [20, 20, 0, 0],
+
+                        shadowBlur: [0, 0, 0, 40],
+                        shadowColor: '#ff5624',
+                        shadowOffsetY: 5,
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        color: "#000",
+                        fontSize: 4
+                    }
+                },
+                z: 10,
+                data: [220, 182, 191, 234, 290, 210, 310, 187]
+            },
+            {
+                name: 'D级门店',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        color: '#C12096',
+                        barBorderRadius: [20, 20, 0, 0],
+
+                        shadowBlur: [0, 0, 0, 40],
+                        shadowColor: '#C12096',
+                        shadowOffsetY: 8,
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        color: "#000",
+                        fontSize: 4
+                    }
+                },
+                z: 5,
+                data: [160, 152, 141, 274, 210, 110, 100, 187]
+            },
+            { // 灰色背景柱状图
+                type: 'bar',
+                barGap: '-100%',
+                barWidth: 15,
+                itemStyle: {
+                    normal: {
+                        color: '#ccc',
+                        barBorderRadius: [20, 20, 0, 0],
+                    }
+                },
+                z: -10,
+                data: ['1000', '1000', '1000', '1000', '1000', '1000', '1000', '1000']
+            }
+        ]
+    };
+    // 3. 把配置项给实例对象
+    myChart_lt_three.setOption(option);
+    // 4. 让图表跟随屏幕自动的去适应
+    window.addEventListener("resize", function() {
+        myChart_lt_three.resize();
+    });
+})();
+
+
+//右侧可视化图表模块
+var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
+(function() {
+
+    option = {
+        title: {
+            text: '',
+            x: 'center'
+        },
+        //—— 悬浮框 ——
+        tooltip: {
+            trigger: 'item',
+            formatter: function(x) {
+                return x.data.label; //设置提示框的内容和格式 节点和边都显示name属性
+            },
+        },
+        legend: [{
+            orient: 'vertical',
+            x: 'right',
+            y: 'center',
+            itemWidth: 14,
+            itemHeight: 14,
+            data: [ //节点数据
+
+                {
+                    name: 'stu7',
+                    icon: 'circle'
+                },
+                {
+                    name: 'stu8',
+                    icon: 'circle'
+                }, {
+                    name: 'stu9',
+                    icon: 'circle'
+                },
+            ],
+        }, ],
+        toolbox: {
+            show: true, //是否显示工具箱
+            feature: {
+                saveAsImage: true // 保存为图片，
+            }
+        },
+        //—— 其他设置 ——
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series: [{
+            type: 'graph',
+            layout: 'force', // 'circular' ,force
+            symbolSize: 100, //图形的大小（示例中的圆的大小）
+            roam: true, //鼠标缩放及平移
+            focusNodeAdjacency: true, //是否在鼠标移到节点上的时候突出显示节点、节点的边和邻接节点
+            label: {
+                normal: {
+                    show: true, //控制非高亮时节点名称是否显示
+                    position: '',
+                    fontSize: 18,
+                    color: 'black'
+                },
+                emphasis: {
+                    show: true, //控制非高亮时节点名称是否显示
+                    position: 'right',
+                    fontSize: 16,
+                    color: 'black'
+                },
+            },
+            force: {
+                x: 'center',
+                y: '50px',
+                edgeLength: 150,
+                //repulsion: 8000
+            },
+            //     edgeSymbol: ['circle', 'arrow'],//箭头
+            //    edgeSymbolSize: [6, 10],
+            edgeLabel: {
+                normal: {
+                    show: false,
+                    textStyle: {
+                        fontSize: 12
+                    },
+                    formatter: "{c}"
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 14 //边节点显示的字体大小
+                    }
+                },
+            },
+
+
+            data: [ //节点数据
+                {
+                    name: 'stu7',
+                    label: '',
+                    draggable: true, //能否鼠标拖动
+                    category: 'stu7',
+                    symbolSize: 30,
+                    label: {
+                        normal: {
+                            show: true, //控制非高亮时节点名称是否显示
+                            position: '',
+                            fontSize: 35,
+                            color: 'black',
+                        },
+                    },
+                }, {
+                    name: 'stu8',
+                    label: '',
+                    draggable: true, //能否鼠标拖动
+                    category: 'stu8',
+                    symbolSize: 5,
+                    label: {
+                        normal: {
+                            show: true, //控制非高亮时节点名称是否显示
+                            position: 'right',
+                            fontSize: 15,
+                            color: 'black',
+                        },
+                    },
+                }, {
+                    name: 'stu9',
+                    label: '',
+                    draggable: true, //能否鼠标拖动
+                    category: 'stu9',
+                    symbolSize: 15,
+                    label: {
+                        normal: {
+                            show: true, //控制非高亮时节点名称是否显示
+                            position: '',
+                            fontSize: 20,
+                            color: 'black',
+                        },
+                    },
+                }, {
+                    name: 'stu10',
+                    label: '',
+                    draggable: true, //能否鼠标拖动
+                    category: 'stu10',
+                    symbolSize: 60,
+                    label: {
+                        normal: {
+                            show: true, //控制非高亮时节点名称是否显示
+                            position: '',
+                            fontSize: 60,
+                            color: 'black',
+                        },
+                    },
+                }, {
+                    name: 'stu11',
+                    label: '',
+                    draggable: true, //能否鼠标拖动
+                    category: 'stu11',
+                    symbolSize: 15,
+                    label: {
+                        normal: {
+                            show: true, //控制非高亮时节点名称是否显示
+                            position: '',
+                            fontSize: 20,
+                            color: 'black',
+                        },
+                    },
+                },
+            ],
+
+            links: [ //连线数据
+                {
+                    source: 'stu7',
+                    target: 'stu8',
+                    value: '',
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 1,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0.4',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                }, {
+                    source: 'stu7',
+                    target: 'stu9',
+                    value: '',
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 8,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0.6',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                }, {
+                    source: 'stu8',
+                    target: 'stu7',
+                    value: '',
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 1,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0.4',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                }, {
+                    source: 'stu8',
+                    target: 'stu9',
+                    value: '',
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 5,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0.4',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                },
+                {
+                    source: 'stu9',
+                    target: 'stu7',
+                    value: '',
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 8,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0.4',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                }, {
+                    source: 'stu9',
+                    target: 'stu8',
+                    value: '',
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 5,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0.4',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                },
+            ],
+
+            categories: [ //节点数据			
+                {
+                    name: 'stu7',
+                    icon: 'circle'
+                },
+                {
+                    name: 'stu8',
+                    icon: 'circle'
+                }, {
+                    name: 'stu9',
+                    icon: 'circle'
+                },
+
+            ],
+
+
+
+        }]
+    }; // 使用刚指定的配置项和数据显示图表。
+    // 3. 把配置项给实例对象
+    myChart_rt_one.setOption(option);
+    // 4. 让图表跟随屏幕自动的去适应
+    window.addEventListener("resize", function() {
+        myChart_rt_one.resize();
     });
 })();

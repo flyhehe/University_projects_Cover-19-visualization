@@ -2,9 +2,17 @@
   margin: 0;
   padding: 0;
 }
+li {
+  list-style: none;
+}
 body {
   width: 24rem;
   transform: scale(0.95, 0.95);
+}
+/* 声明字体*/
+@font-face {
+  font-family: electronicFont;
+  src: url(../font/DS-DIGIT.TTF);
 }
 header {
   position: relative;
@@ -12,7 +20,7 @@ header {
   height: 0.975rem;
   color: #ffffff;
   background: url('../img/header/title.png') no-repeat center center;
-  background-size: 100% 100%;
+  background-size: 100% 120%;
 }
 header h1 {
   text-align: center;
@@ -79,9 +87,71 @@ header .showTime {
 }
 .mainBox .middleBox {
   flex: 5;
-  background-color: skyblue;
+}
+.mainBox .middleBox .map {
+  width: 100%;
+  height: 80%;
 }
 .mainBox .rightBox {
   flex: 3;
-  background-color: pink;
+}
+.on {
+  background: rgba(101, 132, 226, 0.1);
+  padding: 0.1875rem;
+}
+.on .no-hd {
+  position: relative;
+  border: 1px solid rgba(25, 186, 139, 0.17);
+}
+.on .no-hd::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 10px;
+  border-top: 2px solid #02a6b5;
+  border-left: 2px solid #02a6b5;
+}
+.on .no-hd::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 10px;
+  border-bottom: 2px solid #02a6b5;
+  border-right: 2px solid #02a6b5;
+}
+.on .no-hd ul {
+  display: flex;
+}
+.on .no-hd ul li {
+  flex: 1;
+  line-height: 1rem;
+  font-size: 0.875rem;
+  color: #ffeb7b;
+  text-align: center;
+  font-family: 'electronicFont';
+}
+.on .no-hd ul li::after {
+  content: '';
+  position: absolute;
+  top: 25%;
+  right: 0;
+  height: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.on .no-bd ul {
+  display: flex;
+}
+.on .no-bd ul li {
+  flex: 1;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.225rem;
+  height: 0.45rem;
+  line-height: 0.45rem;
+  padding-top: 0.125rem;
 }

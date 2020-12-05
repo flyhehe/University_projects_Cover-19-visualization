@@ -3,13 +3,20 @@
     padding: 0;
 
 }
+li{
+    list-style: none;
+}
 body{
     width: 24rem;
     // width: 1920px;
     // transform-origin: top left;
     transform: scale(0.95,0.95);
 }
-
+/* 声明字体*/
+@font-face {
+    font-family: electronicFont;
+    src: url(../font/DS-DIGIT.TTF);
+  }
 // 这些都是header部分
 header{
     position: relative;
@@ -17,7 +24,7 @@ header{
     height: 0.975rem;
     color: #ffffff;
     background: url('../img/header/title.png') no-repeat center center;
-    background-size: 100% 100%;
+    background-size: 100% 120%;
     h1{
         text-align: center;
         height: 0.975rem;
@@ -39,6 +46,7 @@ header{
         color: #fff;
     }
 }
+// 左右两边的两个盒子
 .mainBox{
     box-sizing: border-box;
     width: 100%;
@@ -49,6 +57,7 @@ header{
     // height: 12.5rem;
     background: url(../img/bg/京东背景.png) no-repeat center center;
     padding: 0.4375rem 0.6875rem;
+
     .leftBox,
     .rightBox{
         flex: 3;
@@ -87,11 +96,80 @@ header{
     }
     .middleBox{
         flex: 5;
-        background-color: skyblue;
+        // background-color: skyblue;
+        .map{
+            width: 100%;
+            height: 80%;
+        }
     }
     .rightBox{
         flex: 3;
-        background-color: pink;
+        // background-color: pink;
     }
 
+}
+
+// 中间的部分
+.on{
+    background: rgba(101, 132, 226, 0.1);
+    padding: 0.1875rem;
+    .no-hd{
+        position: relative;
+        border: 1px solid rgba(25, 186, 139, 0.17);
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 10px;
+            border-top: 2px solid #02a6b5;
+            border-left: 2px solid #02a6b5;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 10px;
+            border-bottom: 2px solid #02a6b5;
+            border-right: 2px solid #02a6b5;
+        }
+        ul{
+            display: flex;
+            li{
+                flex: 1;
+                line-height: 1rem;
+                font-size: 0.875rem;
+                color: #ffeb7b;
+                text-align: center;
+                font-family: 'electronicFont';
+                &::after{
+                    content: '';
+                    position: absolute;
+                    top: 25%;
+                    right: 0;
+                    height: 50%;
+                    width: 1px;
+                    background: rgba(255, 255, 255, 0.2);
+                }
+            }
+            
+        }
+    }
+    .no-bd{
+        ul{
+            display: flex;
+            li{
+                flex: 1;
+                text-align: center;
+                color: rgba(255,255,255,0.7);
+                font-size: 0.225rem;
+                height: 0.45rem;
+                line-height: 0.45rem;
+                padding-top: 0.125rem;
+            }
+        }
+    }
 }

@@ -11,6 +11,7 @@ body {
 }
 html {
   overflow-x: hidden;
+  overflow-y: hidden;
   background: url(../img/bg/bg.jpg) no-repeat center center;
 }
 /* 声明字体*/
@@ -35,7 +36,7 @@ header h1 {
 header::after {
   content: '疫情数据展示';
   position: absolute;
-  top: 0.35rem;
+  top: 0.18rem;
   left: 0.675rem;
 }
 header .showTime {

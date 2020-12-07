@@ -21,7 +21,7 @@ function time() {
 }
 
 //时间模块结束
-
+var bingli = ['确诊病例', '疑似病例', '康复病例', '死亡病例'];
 // 左侧可视化图表模块
 // 左一流图，全国数据——全国感染，全国治愈，全国死亡
 var myChart_lt_one = echarts.init(document.getElementById('chart_lt_one'));
@@ -214,18 +214,18 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 center: ['35%', '50%'],
                 data: [{
                         value: 220,
-                        name: '社会组织'
+                        name: bingli[0]
                     }, {
                         value: 120,
-                        name: '事业单位'
+                        name: bingli[1]
                     },
                     {
                         value: 189,
-                        name: '工商企业登记注册'
+                        name: bingli[2]
                     },
                     {
                         value: 189,
-                        name: '工商企业'
+                        name: bingli[3]
                     }
                 ],
                 label: {
@@ -252,18 +252,18 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 center: ['35%', '50%'],
                 data: [{
                         value: 220,
-                        name: '社会组织'
+                        name: bingli[0]
                     }, {
                         value: 120,
-                        name: '事业单位'
+                        name: bingli[1]
                     },
                     {
                         value: 189,
-                        name: '工商企业登记注册'
+                        name: bingli[2]
                     },
                     {
                         value: 189,
-                        name: '工商企业'
+                        name: bingli[3]
                     }
                 ],
                 label: {
@@ -290,18 +290,18 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 center: ['35%', '50%'],
                 data: [{
                         value: 220,
-                        name: '社会组织'
+                        name: bingli[0]
                     }, {
                         value: 120,
-                        name: '事业单位'
+                        name: bingli[1]
                     },
                     {
                         value: 189,
-                        name: '工商企业登记注册'
+                        name: bingli[2]
                     },
                     {
                         value: 189,
-                        name: '工商企业'
+                        name: bingli[3]
                     }
                 ],
                 label: {
@@ -328,18 +328,18 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 center: ['35%', '50%'],
                 data: [{
                         value: 220,
-                        name: '社会组织'
+                        name: bingli[0]
                     }, {
                         value: 120,
-                        name: '事业单位'
+                        name: bingli[1]
                     },
                     {
                         value: 189,
-                        name: '工商企业登记注册'
+                        name: bingli[2]
                     },
                     {
                         value: 189,
-                        name: '工商企业'
+                        name: bingli[3]
                     }
                 ],
                 label: {
@@ -364,18 +364,18 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 center: ['35%', '50%'],
                 data: [{
                         value: 220,
-                        name: '社会组织'
+                        name: bingli[0]
                     }, {
                         value: 120,
-                        name: '事业单位'
+                        name: bingli[1]
                     },
                     {
                         value: 189,
-                        name: '工商企业登记注册'
+                        name: bingli[2]
                     },
                     {
                         value: 189,
-                        name: '工商企业'
+                        name: bingli[3]
                     }
                 ],
                 label: {
@@ -429,7 +429,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
             }
         },
         legend: {
-            data: ['A级门店', 'B级门店', 'C级门店', 'D级门店'],
+            data: ['确诊病例', '康复病例', '死亡病例'],
             textStyle: {
                 color: '#fff',
             },
@@ -466,7 +466,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
             },
         },
         series: [{
-                name: 'A级门店',
+                name: '确诊病例',
                 type: 'bar',
                 stack: '总量',
                 barWidth: 15,
@@ -488,7 +488,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 data: [320, 302, 301, 334, 390, 330, 320, 320]
             },
             {
-                name: 'B级门店',
+                name: '康复病例',
                 type: 'bar',
                 stack: '总量',
                 itemStyle: {
@@ -512,7 +512,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 data: [120, 132, 101, 134, 90, 230, 210, 101]
             },
             {
-                name: 'C级门店',
+                name: '死亡病例',
                 type: 'bar',
                 stack: '总量',
                 itemStyle: {
@@ -536,31 +536,31 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 z: 10,
                 data: [220, 182, 191, 234, 290, 210, 310, 187]
             },
-            {
-                name: 'D级门店',
-                type: 'bar',
-                stack: '总量',
-                itemStyle: {
-                    normal: {
-                        color: '#C12096',
-                        barBorderRadius: [20, 20, 0, 0],
+            // {
+            //     name: 'D级门店',
+            //     type: 'bar',
+            //     stack: '总量',
+            //     itemStyle: {
+            //         normal: {
+            //             color: '#C12096',
+            //             barBorderRadius: [20, 20, 0, 0],
 
-                        shadowBlur: [0, 0, 0, 40],
-                        shadowColor: '#C12096',
-                        shadowOffsetY: 8,
-                    }
-                },
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'insideRight',
-                        color: "#000",
-                        fontSize: 4
-                    }
-                },
-                z: 5,
-                data: [160, 152, 141, 274, 210, 110, 100, 187]
-            },
+            //             shadowBlur: [0, 0, 0, 40],
+            //             shadowColor: '#C12096',
+            //             shadowOffsetY: 8,
+            //         }
+            //     },
+            //     label: {
+            //         normal: {
+            //             show: true,
+            //             position: 'insideRight',
+            //             color: "#000",
+            //             fontSize: 4
+            //         }
+            //     },
+            //     z: 5,
+            //     data: [160, 152, 141, 274, 210, 110, 100, 187]
+            // },
             { // 灰色背景柱状图
                 type: 'bar',
                 barGap: '-100%',
@@ -568,6 +568,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 itemStyle: {
                     normal: {
                         color: '#ccc',
+                        opacity: '0.2',
                         barBorderRadius: [20, 20, 0, 0],
                     }
                 },
@@ -587,6 +588,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
 
 //右侧可视化图表模块
 var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
+var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
 (function() {
 
     option = {
@@ -602,32 +604,36 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
             },
         },
         legend: [{
+            show: false,
             orient: 'vertical',
             x: 'right',
             y: 'center',
             itemWidth: 14,
             itemHeight: 14,
+            textStyle: {
+                color: "rgba(255, 255, 255, 1)"
+            },
             data: [ //节点数据
 
                 {
-                    name: 'stu7',
+                    name: myChart_rt_one_bingli[0],
                     icon: 'circle'
                 },
                 {
-                    name: 'stu8',
+                    name: myChart_rt_one_bingli[1],
                     icon: 'circle'
                 }, {
-                    name: 'stu9',
+                    name: myChart_rt_one_bingli[2],
                     icon: 'circle'
                 },
             ],
         }, ],
-        toolbox: {
-            show: true, //是否显示工具箱
-            feature: {
-                saveAsImage: true // 保存为图片，
-            }
-        },
+        // toolbox: {
+        //     show: true, //是否显示工具箱
+        //     feature: {
+        //         saveAsImage: true // 保存为图片，
+        //     }
+        // },
         //—— 其他设置 ——
         animationDurationUpdate: 1500,
         animationEasingUpdate: 'quinticInOut',
@@ -663,14 +669,16 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                 normal: {
                     show: false,
                     textStyle: {
-                        fontSize: 12
+                        fontSize: 12,
+                        color: "rgba(255, 5, 5, 1)"
                     },
                     formatter: "{c}"
                 },
                 emphasis: {
                     show: true,
                     textStyle: {
-                        fontSize: 14 //边节点显示的字体大小
+                        fontSize: 14, //边节点显示的字体大小
+
                     }
                 },
             },
@@ -678,24 +686,24 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
 
             data: [ //节点数据
                 {
-                    name: 'stu7',
-                    label: '',
+                    name: myChart_rt_one_bingli[0],
+                    label: 'ccc',
                     draggable: true, //能否鼠标拖动
-                    category: 'stu7',
+                    category: myChart_rt_one_bingli[0],
                     symbolSize: 30,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
                             position: '',
-                            fontSize: 35,
+                            fontSize: 15,
                             color: 'white',
                         },
                     },
                 }, {
-                    name: 'stu8',
-                    label: '',
+                    name: myChart_rt_one_bingli[1],
+                    label: 'bbb',
                     draggable: true, //能否鼠标拖动
-                    category: 'stu8',
+                    category: myChart_rt_one_bingli[1],
                     symbolSize: 5,
                     label: {
                         normal: {
@@ -706,39 +714,11 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                         },
                     },
                 }, {
-                    name: 'stu9',
-                    label: '',
+                    name: myChart_rt_one_bingli[2],
+                    label: 'aaa',
                     draggable: true, //能否鼠标拖动
-                    category: 'stu9',
-                    symbolSize: 15,
-                    label: {
-                        normal: {
-                            show: true, //控制非高亮时节点名称是否显示
-                            position: '',
-                            fontSize: 20,
-                            color: 'white',
-                        },
-                    },
-                }, {
-                    name: 'stu10',
-                    label: '',
-                    draggable: true, //能否鼠标拖动
-                    category: 'white',
-                    symbolSize: 60,
-                    label: {
-                        normal: {
-                            show: true, //控制非高亮时节点名称是否显示
-                            position: '',
-                            fontSize: 60,
-                            color: 'white',
-                        },
-                    },
-                }, {
-                    name: 'stu11',
-                    label: '',
-                    draggable: true, //能否鼠标拖动
-                    category: 'stu11',
-                    symbolSize: 15,
+                    category: myChart_rt_one_bingli[2],
+                    symbolSize: 10,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
@@ -748,13 +728,42 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                         },
                     },
                 },
+                // {
+                //     name: 'stu10',
+                //     label: '',
+                //     draggable: true, //能否鼠标拖动
+                //     category: 'white',
+                //     symbolSize: 60,
+                //     label: {
+                //         normal: {
+                //             show: true, //控制非高亮时节点名称是否显示
+                //             position: '',
+                //             fontSize: 60,
+                //             color: 'white',
+                //         },
+                //     },
+                // }, {
+                //     name: 'stu11',
+                //     label: '',
+                //     draggable: true, //能否鼠标拖动
+                //     category: 'stu11',
+                //     symbolSize: 15,
+                //     label: {
+                //         normal: {
+                //             show: true, //控制非高亮时节点名称是否显示
+                //             position: '',
+                //             fontSize: 20,
+                //             color: 'white',
+                //         },
+                //     },
+                // },
             ],
 
             links: [ //连线数据
                 {
-                    source: 'stu7',
-                    target: 'stu8',
-                    value: '',
+                    source: myChart_rt_one_bingli[0],
+                    target: myChart_rt_one_bingli[1],
+                    value: '800',
                     label: '',
                     lineStyle: {
                         normal: {
@@ -769,9 +778,9 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                     }
 
                 }, {
-                    source: 'stu7',
-                    target: 'stu9',
-                    value: '',
+                    source: myChart_rt_one_bingli[0],
+                    target: myChart_rt_one_bingli[2],
+                    value: '850',
                     label: '',
                     lineStyle: {
                         normal: {
@@ -786,14 +795,14 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                     }
 
                 }, {
-                    source: 'stu8',
-                    target: 'stu7',
-                    value: '',
+                    source: myChart_rt_one_bingli[1],
+                    target: myChart_rt_one_bingli[0],
+                    value: '950',
                     label: '',
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: 1,
+                            width: 4,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -803,9 +812,9 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                     }
 
                 }, {
-                    source: 'stu8',
-                    target: 'stu9',
-                    value: '',
+                    source: myChart_rt_one_bingli[1],
+                    target: myChart_rt_one_bingli[2],
+                    value: '750',
                     label: '',
                     lineStyle: {
                         normal: {
@@ -820,53 +829,54 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
                     }
 
                 },
-                {
-                    source: 'stu9',
-                    target: 'stu7',
-                    value: '',
-                    label: '',
-                    lineStyle: {
-                        normal: {
-                            show: true,
-                            width: 8,
-                            color: 'source',
-                            curveness: 0.2,
-                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
-                            opacity: '1',
-                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-                        },
-                    }
+                // {
+                //     source: myChart_rt_one_bingli[2],
+                //     target: myChart_rt_one_bingli[0],
+                //     value: '23',
+                //     label: '',
+                //     lineStyle: {
+                //         normal: {
+                //             show: true,
+                //             width: 8,
+                //             color: 'source',
+                //             curveness: 0.2,
+                //             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                //             opacity: '1',
+                //             // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                //         },
+                //     }
 
-                }, {
-                    source: 'stu9',
-                    target: 'stu8',
-                    value: '',
-                    label: '',
-                    lineStyle: {
-                        normal: {
-                            show: true,
-                            width: 5,
-                            color: 'source',
-                            curveness: 0.2,
-                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
-                            opacity: '1',
-                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-                        },
-                    }
+                // },
+                // {
+                //     source: myChart_rt_one_bingli[2],
+                //     target: myChart_rt_one_bingli[1],
+                //     value: '1234',
+                //     label: '',
+                //     lineStyle: {
+                //         normal: {
+                //             show: true,
+                //             width: 5,
+                //             color: 'source',
+                //             curveness: 0.2,
+                //             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                //             opacity: '1',
+                //             // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                //         },
+                //     }
 
-                },
+                // },
             ],
 
             categories: [ //节点数据			
                 {
-                    name: 'stu7',
+                    name: myChart_rt_one_bingli[0],
                     icon: 'circle'
                 },
                 {
-                    name: 'stu8',
+                    name: myChart_rt_one_bingli[1],
                     icon: 'circle'
                 }, {
-                    name: 'stu9',
+                    name: myChart_rt_one_bingli[2],
                     icon: 'circle'
                 },
 
@@ -885,6 +895,8 @@ var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
 })();
 
 var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
+var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
+
 (function() {
     var img = [
         "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABRCAYAAABFTSEIAAAACXBIWXMAAAsSAAALEgHS3X78AAAEp0lEQVR42u3cz4sjRRTA8W9Vd3Vn8mMmjj9WQWSRZQ+CsH+B7MnDIgiCd0E8CYJ/gOAIelo8ehUP/gF6WLw5/gMueFP2sIcF0dHd2Z1kknR11fOQZJJJMtlZd03H7HtQpNOTnpn+8Lrm1etmjIig8e/DKoECKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIqoAJudKTr+osZMNPvBUQBHwHsPF9fB9R0DeHMOQ6T6WOrhEzXBM4swDOL0M6CrArRVoq3t2dGUIb9fTvatg8ZZup1PDBgzPmy98mey6qfzjLz2WaWjEUZKEvGyi9nWyneMOvGIyFQo2Sbg4MUSChpU9IeTTUpJdsEajPZOJeJG5uBZj7rLLduWS5dGm6XNLEELOFUFj54ACJCaychkpDSASK3bwsXL0YgVpWJKwM0iy9Zy8HdGru7jvt3Pbu7w0wES7drTwAbjTHMGCsQcIAnYTC1/wRx0wEnl27JNgZI8HQ6Kc1mQq83RNzaMjPzXqDbjTQaJRFLxIyyMSxAXEkWrhrQzAAmo5HOjCQf7jflILxOkohL+aUPgV4vEGNJo+E5PAy02+UIMEwBxo0CPDP7Dg5SnEtpt1PA0e87XO25FOoh8IYIH2Y5b45RzGAQBiIltZoHxqMcjbksXAVgdc2EQMYzzzdotyeZWKuleULXJtwT4SODfC2QCWR+IF9KnjuX1Xbo99Op7LVE8iXlz0YBTk5SyLEEjo5OLuccEoFUvHfO+reuUPx4zftXAIcx1hdcF+/TvFab4A0Bs0VwqyhpVnkJT89/Q4DDQ0e77YCMwIUsFMeFZD856699URRvX4nxE4A/jbnxXp7v4Zw3ReGNSDHI8wFQjIafuoyn58L/fB6sth/Ybg9fez2TRC6QZcZYvgHsazF+MP7YCyLXcM7gvSXLDGBqYDg+NhwdmSpPoTrAkub0W+f4FSB1fDucIunMHSLpO8WAH0rSy8u+19MBCHB4OHzd2pI+CEUhpigEiN+l6WcdY252jLn5s7Wf472ImPcN8pUl/tEHoV4XWq1Ke4KrLmPsTA3oODpytFoOyJKSyzHyMSIxteWngMW5cSEdDJQUhTdZVgxOz3/+jFJm4+bA2e5JpNU6WZ4Fw99JwnWMKccwpeddP+B7GZTNUPKqybJy0O+Hs1YfMz9swwvpB8fbGDG0GuGkkK7V0hxSmZQpABI8l2z0v3sJf50qpAMJCd2qCulql3LD1lRGQjm7lEsDz0rkxTQOfiPPxUBcuJTbbhss/Y1eyi3NwsmKInmkZsKk5gtPUzNhvp11507CSy/X6XYStpvFudpZw1ZWIOF4Cq6SdtbKbioJyAhRTu3u9yMJXerN+ugvaQQsjcZ8Q3VnZwxlSDhe1lB9GjrSw5b+1avT8+Jw+979nNaOI6U3KpTrWAosxVQmygK4ld8X0ZtK/7eViExD7O1NQPb3T7fsl4/4sBpwYzPwjFbTo95Yl9l9Vd1YN1X/147HebSjary1AHyc5qc+XLQEQx9ve8Kg6xr6hKoCKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIq4JrHP8fEWV8FMTmOAAAAAElFTkSuQmCC",
@@ -896,7 +908,6 @@ var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
     var option = {
         // backgroundColor: "#000E1A",
         title: {
-            // text: "月供水量分析",
             textStyle: {
                 align: "center",
                 color: "#fff",
@@ -911,7 +922,7 @@ var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
         legend: {
             show: true,
             color: ["#F58080", "#47D8BE", "#F9A589"],
-            data: ["月计划供水量", "月供水量", "月供销差"],
+            data: [myChart_rt_two_bingli[0], myChart_rt_two_bingli[1], myChart_rt_two_bingli[2]],
             left: "center",
             top: "6%",
             textStyle: {
@@ -973,72 +984,74 @@ var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
                 show: false,
             },
         },
-        series: [{
-                name: "月计划供水量",
-                type: "line",
-                data: [625, 426, 413, 740, 335, 135],
-                symbol: img[2],
-                symbolSize: 80,
-                itemStyle: {
-                    normal: {
-                        borderWidth: 1,
-                        color: "#056C98",
-                    },
-                },
-            },
-            {
-                name: "光点",
-                type: "lines",
-                smooth: true,
-                coordinateSystem: "cartesian2d",
-                polyline: true,
-                effect: {
-                    show: true,
-                    trailLength: 0,
-                    symbol: "arrow",
-                    period: 30, //光点滑动速度
-                    symbolSize: 120,
-                    symbol: img[2],
-                },
-                lineStyle: {
-                    normal: {
-                        width: 1,
-                        color: {
-                            type: "linear",
+        series: [
 
-                            colorStops: [{
-                                    offset: 0,
-                                    color: "#58C6F7", // 0% 处的颜色
-                                },
-                                {
-                                    offset: 0.4,
-                                    color: "#17B4FA", // 100% 处的颜色
-                                },
-                                {
-                                    offset: 1,
-                                    color: "#1A6AF2", // 100% 处的颜色
-                                },
-                            ],
-                            globalCoord: false, // 缺省为 false
-                        },
-                        shadowColor: "#056C98",
-                        shadowBlur: 1,
-                        shadowOffsetY: 0,
-                    },
-                },
-                data: [{
-                    coords: [
-                        ["1月", 625],
-                        ["2月", 426],
-                        ["3月", 413],
-                        ["4月", 740],
-                        ["5月", 335],
-                        ["6月", 135],
-                    ],
-                }, ],
-            },
+            // {
+            //     name: myChart_rt_two_bingli[0],
+            //     type: "line",
+            //     data: [625, 426, 413, 650, 335, 135],
+            //     symbol: img[2],
+            //     symbolSize: 80,
+            //     itemStyle: {
+            //         normal: {
+            //             borderWidth: 1,
+            //             color: "#056C98",
+            //         },
+            //     },
+            // },
+            // {
+            //     name: "光点1",
+            //     type: "lines",
+            //     smooth: true,
+            //     coordinateSystem: "cartesian2d",
+            //     polyline: true,
+            //     effect: {
+            //         show: true,
+            //         trailLength: 0,
+            //         symbol: "arrow",
+            //         period: 30, //光点滑动速度
+            //         symbolSize: 120,
+            //         symbol: img[0],
+            //     },
+            //     lineStyle: {
+            //         normal: {
+            //             width: 1,
+            //             color: {
+            //                 type: "linear",
+
+            //                 colorStops: [{
+            //                         offset: 0,
+            //                         color: "#58C6F7", // 0% 处的颜色
+            //                     },
+            //                     {
+            //                         offset: 0.4,
+            //                         color: "#17B4FA", // 100% 处的颜色
+            //                     },
+            //                     {
+            //                         offset: 1,
+            //                         color: "#1A6AF2", // 100% 处的颜色
+            //                     },
+            //                 ],
+            //                 globalCoord: false, // 缺省为 false
+            //             },
+            //             shadowColor: "#056C98",
+            //             shadowBlur: 1,
+            //             shadowOffsetY: 0,
+            //         },
+            //     },
+            //     data: [{
+            //         coords: [
+            //             ["1月", 625],
+            //             ["2月", 426],
+            //             ["3月", 413],
+            //             ["4月", 650],
+            //             ["5月", 335],
+            //             ["6月", 135],
+            //         ],
+            //     }, ],
+            // },
             {
-                name: "月供水量",
+                name: myChart_rt_two_bingli[0],
                 type: "line",
                 symbol: img[1],
                 symbolSize: 80,
@@ -1101,7 +1114,7 @@ var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
                 }, ],
             },
             {
-                name: "月供销差",
+                name: myChart_rt_two_bingli[1],
                 type: "line",
                 symbol: img[3],
                 symbolSize: 80,
@@ -1166,7 +1179,7 @@ var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
                         ["3月", 524],
                         ["4月", 338],
                         ["5月", 535],
-                        ["6月", 235],
+                        ["6月", 236],
                     ],
                 }, ],
             },
@@ -1181,6 +1194,7 @@ var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
 })();
 
 var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
+var myChart_rt_three_dengji = ['危险', '注意', '安全'];
 (function() {
     option = {
         // backgroundColor: {
@@ -1202,8 +1216,8 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
         //     globalCoord: false
         // },
         title: {
-            text: '转化率',
-            subtext: '转化的百分率或分率',
+            text: '警戒程度',
+            // subtext: '转化的百分率或分率',
             link: 'https://gallery.echartsjs.com/explore.html?u=bd-1841183165&type=work',
             target: 'blank',
             x: 'center',
@@ -1220,7 +1234,7 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
         },
 
         legend: {
-            data: ['A', 'B', 'C'],
+            data: [myChart_rt_three_dengji[0], myChart_rt_three_dengji[1], myChart_rt_three_dengji[2]],
             x: 'center',
             y: 'bottom',
             textStyle: {
@@ -1236,9 +1250,9 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
                 name: 'TIT',
                 type: 'funnel',
                 left: 'center',
-                width: '90%',
+                width: '70%',
                 bottom: '30',
-                top: '45',
+                top: '25',
                 sort: 'ascending',
                 label: {
                     normal: {
@@ -1263,14 +1277,14 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
 
                 data: [{
                         value: 5,
-                        name: 'A'
+                        name: myChart_rt_three_dengji[0]
                     }, {
                         value: 10,
-                        name: 'B'
+                        name: myChart_rt_three_dengji[1]
                     },
                     {
                         value: 15,
-                        name: 'C'
+                        name: myChart_rt_three_dengji[2]
                     },
                 ]
             },
@@ -1280,9 +1294,9 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
                 type: 'funnel',
                 left: 'center',
                 bottom: '30',
-                top: '45',
-                width: '80%',
-                maxSize: '80%',
+                top: '25',
+                width: '70%',
+                maxSize: '70%',
                 sort: 'ascending',
                 label: {
                     normal: {
@@ -1312,14 +1326,14 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
 
                 data: [{
                         value: 5,
-                        name: 'A'
+                        name: myChart_rt_three_dengji[0]
                     }, {
                         value: 10,
-                        name: 'B'
+                        name: myChart_rt_three_dengji[1]
                     },
                     {
                         value: 15,
-                        name: 'C'
+                        name: myChart_rt_three_dengji[2]
                     },
 
                 ]
@@ -1338,12 +1352,13 @@ var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
 
 
 // 中间地图
-var myChart_md_one = echarts.init(document.querySelector('.map'));
+var myChart_md_one = echarts.init(document.querySelector('.chart'));
 (function() {
     option = {
         title: {
             text: '中国疫情图',
             left: 'center',
+            top: '70',
             textStyle: {
                 color: "rgba(255, 255, 255, .8)"
             },
@@ -1358,6 +1373,11 @@ var myChart_md_one = echarts.init(document.querySelector('.map'));
         },
         visualMap: {
             type: 'piecewise',
+            left: '35',
+            bottom: '20',
+            textStyle: {
+                color: "rgba(255, 255, 255, 1)"
+            },
             pieces: [
                 { min: 1000, max: 1000000, label: '大于等于1000人', color: '#372a28' },
                 { min: 500, max: 999, label: '确诊500-999人', color: '#4e160f' },

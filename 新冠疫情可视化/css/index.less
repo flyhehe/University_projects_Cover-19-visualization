@@ -9,7 +9,7 @@ li{
 body{
     width: 24rem;
     // width: 1920px;
-    // transform-origin: top left;
+    transform-origin: top center;
     transform: scale(0.95,0.95);
 }
 /* 声明字体*/
@@ -55,7 +55,8 @@ header{
     // 这个才是合理的高度
     // height: 12.5rem;
     // height: 12.5rem;
-    background: url(../img/bg/京东背景.png) no-repeat center center;
+    // background: url(../img/bg/京东背景.png) no-repeat center center;
+    background: url(../img/bg/bg.jpg) no-repeat center center;
     padding: 0.4375rem 0.6875rem;
 
     .leftBox,
@@ -97,10 +98,71 @@ header{
     .middleBox{
         flex: 5;
         // background-color: skyblue;
+        .on_head{
+            width: 100%;
+            height: 0.45rem;
+        }
         .map{
+            width: 100%;
+            height: 100%;
+        }
+        .chart,
+        .map1,
+        .map2,
+        .map3{
             width: 100%;
             height: 80%;
         }
+        .chart{
+            z-index: 5;
+        }        
+        .map1,
+        .map2,
+        .map3{
+           position: absolute;
+           top:  62%; 
+           left: 50%;
+           transform: translate(-50%, -50%);
+           width: 7.375rem;
+           height: 7.375rem;
+           background: url(../img/map.png) no-repeat;
+           background-size: 100% 100%;
+           opacity: 0.3;
+        }
+        .map2{
+            width: 8.375rem;
+            height: 8.375rem;
+            background: url(../img/lbx.png);
+           background-size: 100% 100%;
+
+            opacity: 0.6;
+            animation: rotate 15s linear infinite;
+            z-index: 2;
+        }
+        .map3{
+            width: 7.95rem;
+            height: 7.95rem;
+            background: url(../img/jt.png);
+           background-size: 100% 100%;
+
+            animation:  rotate1 10s linear infinite;
+        }
+        @keyframes rotate {
+            from{
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+              }
+        }
+        @keyframes rotate1 {
+            from {
+              transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+              transform: translate(-50%, -50%) rotate(-360deg);
+            }
+          }
     }
     .rightBox{
         flex: 3;
@@ -109,13 +171,15 @@ header{
 
 }
 
-// 中间的部分
+// 中间的部分 包括数字显示部分
 .on{
     background: rgba(101, 132, 226, 0.1);
     padding: 0.1875rem;
+
     .no-hd{
         position: relative;
-        border: 1px solid rgba(25, 186, 139, 0.17);
+        border: 1px solid rgba(25, 186, 139, 0.4);
+        // margin-top: 50px;
         &::before{
             content: '';
             position: absolute;
@@ -149,10 +213,10 @@ header{
                     content: '';
                     position: absolute;
                     top: 25%;
-                    right: 0;
+                    right: 50%;
                     height: 50%;
                     width: 1px;
-                    background: rgba(255, 255, 255, 0.2);
+                    background: rgba(255, 255, 255, 0.4);
                 }
             }
             
@@ -172,4 +236,63 @@ header{
             }
         }
     }
+}
+
+// 每个图表的背景图
+.leftBox > div>div,
+.rightBox > div>div{
+position: relative;
+border: 1px solid rgba(25, 186, 139, 0.4);
+background: url(../img/line.png);
+    &::before{
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-top: 2px solid #02a6b5;
+        border-left: 2px solid #02a6b5;
+    }
+    &::after{
+        position: absolute;
+        top: 0;
+        right: 0;
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-top: 2px solid #02a6b5;
+        border-right: 2px solid #02a6b5;
+    }
+}
+//设定每个图表都是相对坐标
+.panel{
+    position: relative;
+}
+.foot{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    // height: 50px;
+    &::before{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-bottom: 2px solid #02a6b5;
+        border-left: 2px solid #02a6b5;
+    }
+    &::after {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-bottom: 2px solid #02a6b5;
+        border-right: 2px solid #02a6b5;
+      }
 }

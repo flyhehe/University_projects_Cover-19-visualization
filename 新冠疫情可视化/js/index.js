@@ -1374,7 +1374,7 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
         visualMap: {
             type: 'piecewise',
             left: '35',
-            bottom: '20',
+            bottom: '45',
             textStyle: {
                 color: "rgba(255, 255, 255, 1)"
             },
@@ -1410,6 +1410,7 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
             name: '确诊数',
             type: 'map',
             mapType: 'china',
+            top: '70',
             roam: false,
             label: {
                 show: true,

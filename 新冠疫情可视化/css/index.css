@@ -36,7 +36,7 @@ header h1 {
 header::after {
   content: '疫情数据展示';
   position: absolute;
-  top: 0.18rem;
+  top: 0.25rem;
   left: 0.675rem;
 }
 header .showTime {

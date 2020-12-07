@@ -8,7 +8,10 @@ li {
 body {
   width: 24rem;
   transform-origin: top center;
-  transform: scale(0.95, 0.95);
+}
+html {
+  overflow-x: hidden;
+  background: url(../img/bg/bg.jpg) no-repeat center center;
 }
 /* 声明字体*/
 @font-face {
@@ -46,8 +49,6 @@ header .showTime {
   box-sizing: border-box;
   width: 100%;
   display: flex;
-  background-color: black;
-  background: url(../img/bg/bg.jpg) no-repeat center center;
   padding: 0.4375rem 0.6875rem;
 }
 .mainBox .leftBox,

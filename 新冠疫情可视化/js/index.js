@@ -723,7 +723,7 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
                             position: '',
-                            fontSize: 20,
+                            fontSize: 15,
                             color: 'white',
                         },
                     },

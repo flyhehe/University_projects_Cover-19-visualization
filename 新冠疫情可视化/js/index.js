@@ -589,6 +589,9 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
 //右侧可视化图表模块
 var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
 var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
+var data_rt_one = [5000, 4000, 800];
+var avg = 200;
+var avglinks = 700;
 (function() {
 
     option = {
@@ -598,9 +601,18 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
         },
         //—— 悬浮框 ——
         tooltip: {
-            trigger: 'item',
+            trigger: "item",
+            triggerOn: "mousemove",
+            backgroundColor: "rgba(1,70,86,1)",
+            borderColor: "rgba(0,246,255,1)",
+            borderWidth: 0.5,
+            textStyle: {
+                fontSize: 10
+            },
+            // formatter: '{b}'
+            // trigger: 'item',
             formatter: function(x) {
-                return x.data.label; //设置提示框的内容和格式 节点和边都显示name属性
+                return x.data.value; //设置提示框的内容和格式 节点和边都显示name属性
             },
         },
         legend: [{
@@ -660,14 +672,14 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
             force: {
                 x: 'center',
                 y: '50px',
-                edgeLength: 150,
+                edgeLength: 120,
                 //repulsion: 8000
             },
             //     edgeSymbol: ['circle', 'arrow'],//箭头
             //    edgeSymbolSize: [6, 10],
             edgeLabel: {
                 normal: {
-                    show: false,
+                    show: true,
                     textStyle: {
                         fontSize: 12,
                         color: "rgba(255, 5, 5, 1)"
@@ -687,10 +699,11 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
             data: [ //节点数据
                 {
                     name: myChart_rt_one_bingli[0],
-                    label: 'ccc',
+                    label: '确诊病例',
+                    value: data_rt_one[0],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[0],
-                    symbolSize: 30,
+                    symbolSize: data_rt_one[0] / avg,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
@@ -701,24 +714,26 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
                     },
                 }, {
                     name: myChart_rt_one_bingli[1],
-                    label: 'bbb',
+                    label: '康复病例',
+                    value: data_rt_one[1],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[1],
-                    symbolSize: 5,
+                    symbolSize: data_rt_one[1] / avg,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
-                            position: 'right',
+                            position: '',
                             fontSize: 15,
                             color: 'white',
                         },
                     },
                 }, {
                     name: myChart_rt_one_bingli[2],
-                    label: 'aaa',
+                    label: '死亡病例',
+                    value: data_rt_one[2],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[2],
-                    symbolSize: 10,
+                    symbolSize: data_rt_one[2] / avg,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
@@ -763,12 +778,12 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
                 {
                     source: myChart_rt_one_bingli[0],
                     target: myChart_rt_one_bingli[1],
-                    value: '800',
+                    value: data_rt_one[2],
                     label: '',
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: 1,
+                            width: data_rt_one[0] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -785,7 +800,7 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: 8,
+                            width: data_rt_one[2] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -802,7 +817,7 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: 4,
+                            width: data_rt_one[1] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -819,7 +834,7 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: 5,
+                            width: data_rt_one[1] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -896,7 +911,18 @@ var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
 
 var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
 var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
+var myChart_rt_two_bingliNum = [1000, 1200, 1400, 1100, 900, 800];
+var myChart_rt_two_bingliNum_yesterday = [];
+var gailu = myChart_rt_two_bingliNum[1] / myChart_rt_two_bingliNum[0];
+console.log(gailu);
+for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
+    // 用前日的扩散率乘以今日的实际病例得出明天的预测病例
+    myChart_rt_two_bingliNum_yesterday[(i - 1)] = parseInt(gailu * myChart_rt_two_bingliNum[i]);
+    //根据数据修改扩散率
+    gailu = myChart_rt_two_bingliNum[i] / myChart_rt_two_bingliNum[i - 1];
 
+}
+console.log(myChart_rt_two_bingliNum_yesterday);
 (function() {
     var img = [
         "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABRCAYAAABFTSEIAAAACXBIWXMAAAsSAAALEgHS3X78AAAEp0lEQVR42u3cz4sjRRTA8W9Vd3Vn8mMmjj9WQWSRZQ+CsH+B7MnDIgiCd0E8CYJ/gOAIelo8ehUP/gF6WLw5/gMueFP2sIcF0dHd2Z1kknR11fOQZJJJMtlZd03H7HtQpNOTnpn+8Lrm1etmjIig8e/DKoECKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIqoAJudKTr+osZMNPvBUQBHwHsPF9fB9R0DeHMOQ6T6WOrhEzXBM4swDOL0M6CrArRVoq3t2dGUIb9fTvatg8ZZup1PDBgzPmy98mey6qfzjLz2WaWjEUZKEvGyi9nWyneMOvGIyFQo2Sbg4MUSChpU9IeTTUpJdsEajPZOJeJG5uBZj7rLLduWS5dGm6XNLEELOFUFj54ACJCaychkpDSASK3bwsXL0YgVpWJKwM0iy9Zy8HdGru7jvt3Pbu7w0wES7drTwAbjTHMGCsQcIAnYTC1/wRx0wEnl27JNgZI8HQ6Kc1mQq83RNzaMjPzXqDbjTQaJRFLxIyyMSxAXEkWrhrQzAAmo5HOjCQf7jflILxOkohL+aUPgV4vEGNJo+E5PAy02+UIMEwBxo0CPDP7Dg5SnEtpt1PA0e87XO25FOoh8IYIH2Y5b45RzGAQBiIltZoHxqMcjbksXAVgdc2EQMYzzzdotyeZWKuleULXJtwT4SODfC2QCWR+IF9KnjuX1Xbo99Op7LVE8iXlz0YBTk5SyLEEjo5OLuccEoFUvHfO+reuUPx4zftXAIcx1hdcF+/TvFab4A0Bs0VwqyhpVnkJT89/Q4DDQ0e77YCMwIUsFMeFZD856699URRvX4nxE4A/jbnxXp7v4Zw3ReGNSDHI8wFQjIafuoyn58L/fB6sth/Ybg9fez2TRC6QZcZYvgHsazF+MP7YCyLXcM7gvSXLDGBqYDg+NhwdmSpPoTrAkub0W+f4FSB1fDucIunMHSLpO8WAH0rSy8u+19MBCHB4OHzd2pI+CEUhpigEiN+l6WcdY252jLn5s7Wf472ImPcN8pUl/tEHoV4XWq1Ke4KrLmPsTA3oODpytFoOyJKSyzHyMSIxteWngMW5cSEdDJQUhTdZVgxOz3/+jFJm4+bA2e5JpNU6WZ4Fw99JwnWMKccwpeddP+B7GZTNUPKqybJy0O+Hs1YfMz9swwvpB8fbGDG0GuGkkK7V0hxSmZQpABI8l2z0v3sJf50qpAMJCd2qCulql3LD1lRGQjm7lEsDz0rkxTQOfiPPxUBcuJTbbhss/Y1eyi3NwsmKInmkZsKk5gtPUzNhvp11507CSy/X6XYStpvFudpZw1ZWIOF4Cq6SdtbKbioJyAhRTu3u9yMJXerN+ugvaQQsjcZ8Q3VnZwxlSDhe1lB9GjrSw5b+1avT8+Jw+979nNaOI6U3KpTrWAosxVQmygK4ld8X0ZtK/7eViExD7O1NQPb3T7fsl4/4sBpwYzPwjFbTo95Yl9l9Vd1YN1X/147HebSjary1AHyc5qc+XLQEQx9ve8Kg6xr6hKoCKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIq4JrHP8fEWV8FMTmOAAAAAElFTkSuQmCC",
@@ -922,7 +948,7 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
         legend: {
             show: true,
             color: ["#F58080", "#47D8BE", "#F9A589"],
-            data: [myChart_rt_two_bingli[0], myChart_rt_two_bingli[1], myChart_rt_two_bingli[2]],
+            data: [myChart_rt_two_bingli[0], myChart_rt_two_bingli[1]],
             left: "center",
             top: "6%",
             textStyle: {
@@ -939,7 +965,7 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
         },
         xAxis: {
             type: "category",
-            data: ["1月", "2月", "3月", "4月", "5月", "6月"],
+            data: ["21号", "22号", "23号", "24号", "25号", "26号"],
             axisLine: {
                 lineStyle: {
                     color: "#999",
@@ -948,7 +974,7 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
             axisLabel: {
                 color: "#fff",
                 textStyle: {
-                    fontSize: 12,
+                    fontSize: 10,
                 },
             },
         },
@@ -956,7 +982,7 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
             type: "value",
             // min: 300,
             // max: 850,
-            name: "m³",
+            name: "人数/千",
             splitLine: {
                 show: true,
                 lineStyle: {
@@ -986,76 +1012,21 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
         },
         series: [
 
-            // {
-            //     name: myChart_rt_two_bingli[0],
-            //     type: "line",
-            //     data: [625, 426, 413, 650, 335, 135],
-            //     symbol: img[2],
-            //     symbolSize: 80,
-            //     itemStyle: {
-            //         normal: {
-            //             borderWidth: 1,
-            //             color: "#056C98",
-            //         },
-            //     },
-            // },
-            // {
-            //     name: "光点1",
-            //     type: "lines",
-            //     smooth: true,
-            //     coordinateSystem: "cartesian2d",
-            //     polyline: true,
-            //     effect: {
-            //         show: true,
-            //         trailLength: 0,
-            //         symbol: "arrow",
-            //         period: 30, //光点滑动速度
-            //         symbolSize: 120,
-            //         symbol: img[0],
-            //     },
-            //     lineStyle: {
-            //         normal: {
-            //             width: 1,
-            //             color: {
-            //                 type: "linear",
 
-            //                 colorStops: [{
-            //                         offset: 0,
-            //                         color: "#58C6F7", // 0% 处的颜色
-            //                     },
-            //                     {
-            //                         offset: 0.4,
-            //                         color: "#17B4FA", // 100% 处的颜色
-            //                     },
-            //                     {
-            //                         offset: 1,
-            //                         color: "#1A6AF2", // 100% 处的颜色
-            //                     },
-            //                 ],
-            //                 globalCoord: false, // 缺省为 false
-            //             },
-            //             shadowColor: "#056C98",
-            //             shadowBlur: 1,
-            //             shadowOffsetY: 0,
-            //         },
-            //     },
-            //     data: [{
-            //         coords: [
-            //             ["1月", 625],
-            //             ["2月", 426],
-            //             ["3月", 413],
-            //             ["4月", 650],
-            //             ["5月", 335],
-            //             ["6月", 135],
-            //         ],
-            //     }, ],
-            // },
             {
                 name: myChart_rt_two_bingli[0],
                 type: "line",
                 symbol: img[1],
                 symbolSize: 80,
-                data: [322, 636, 538, 230, 334, 235],
+                data: [
+                    myChart_rt_two_bingliNum_yesterday[0],
+                    myChart_rt_two_bingliNum_yesterday[1],
+                    myChart_rt_two_bingliNum_yesterday[2],
+                    myChart_rt_two_bingliNum_yesterday[3],
+                    myChart_rt_two_bingliNum_yesterday[4],
+                    myChart_rt_two_bingliNum_yesterday[5],
+
+                ],
 
                 itemStyle: {
                     normal: {
@@ -1079,46 +1050,22 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
                     symbolSize: 100,
                     symbol: img[0],
                 },
-                lineStyle: {
-                    normal: {
-                        width: 1,
-                        color: {
-                            type: "linear",
 
-                            colorStops: [{
-                                offset: 0,
-                                color: '#58C6F7' // 0% 处的颜色
-                            }, {
-                                offset: 0.4,
-                                color: '#17B4FA' // 100% 处的颜色
-                            }, {
-                                offset: 1,
-                                color: '#1A6AF2' // 100% 处的颜色
-                            }],
-                            globalCoord: false, // 缺省为 false
-                        },
-                        shadowColor: "rgba(71,216,190, 0.5)",
-                        shadowBlur: 1,
-                        shadowOffsetY: 0,
-                    },
-                },
-                data: [{
-                    coords: [
-                        ["1月", 322],
-                        ["2月", 636],
-                        ["3月", 538],
-                        ["4月", 230],
-                        ["5月", 334],
-                        ["6月", 235],
-                    ],
-                }, ],
             },
             {
                 name: myChart_rt_two_bingli[1],
                 type: "line",
                 symbol: img[3],
                 symbolSize: 80,
-                data: [532, 334, 524, 338, 535, 236],
+                data: [
+
+                    myChart_rt_two_bingliNum[0],
+                    myChart_rt_two_bingliNum[1],
+                    myChart_rt_two_bingliNum[2],
+                    myChart_rt_two_bingliNum[3],
+                    myChart_rt_two_bingliNum[4],
+                    myChart_rt_two_bingliNum[5]
+                ],
 
                 itemStyle: {
                     normal: {
@@ -1172,16 +1119,6 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
                         shadowOffsetY: 0,
                     },
                 },
-                data: [{
-                    coords: [
-                        ["1月", 532],
-                        ["2月", 334],
-                        ["3月", 524],
-                        ["4月", 338],
-                        ["5月", 535],
-                        ["6月", 236],
-                    ],
-                }, ],
             },
         ],
     };
@@ -1344,7 +1281,7 @@ var myChart_rt_three_dengji = ['危险', '注意', '安全'];
     myChart_rt_three.setOption(option);
     // 4. 让图表跟随屏幕自动的去适应
     window.addEventListener("resize", function() {
-        myChart_rt_two.resize();
+        myChart_rt_three.resize();
     });
 })();
 
@@ -1358,7 +1295,7 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
         title: {
             text: '中国疫情图',
             left: 'center',
-            top: '70',
+            top: '80',
             textStyle: {
                 color: "rgba(255, 255, 255, .8)"
             },

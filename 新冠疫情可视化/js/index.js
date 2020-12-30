@@ -914,7 +914,6 @@ var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
 var myChart_rt_two_bingliNum = [1000, 1200, 1400, 1100, 900, 800];
 var myChart_rt_two_bingliNum_yesterday = [];
 var gailu = myChart_rt_two_bingliNum[1] / myChart_rt_two_bingliNum[0];
-console.log(gailu);
 for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
     // 用前日的扩散率乘以今日的实际病例得出明天的预测病例
     myChart_rt_two_bingliNum_yesterday[(i - 1)] = parseInt(gailu * myChart_rt_two_bingliNum[i]);

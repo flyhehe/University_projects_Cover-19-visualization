@@ -20,10 +20,97 @@ function time() {
     document.querySelector(".showTime").innerHTML = y + "年" + mt + "月" + day + "日" + weekday + '&nbsp&nbsp' + h + ":" + m + ":" + s;
 }
 
+
+
 //时间模块结束
-var bingli = ['确诊病例', '疑似病例', '康复病例', '死亡病例'];
+
+
+//数据储存模块
+// 左一   循序，天数 新增确诊 当天治愈 当天死亡
+var left_one_data = [
+    [21, 18, 0],
+    [19, 15, 0],
+    [20, 17, 0],
+    [25, 19, 0],
+    [24, 12, 0],
+    [18, 25, 0],
+    [23, 25, 0],
+    [41, 23, 0],
+    [11, 16, 0]
+];
+
+// 十月八号当日 现存 + 康复 + 死亡 + 现存确诊，前八排序，用于左三
+var left_three_data = [
+    ["香港", 166, 5, 0],
+    ["上海", 58, 5, 0],
+    ["四川", 42, 3, 0],
+    ["台湾", 30, 1, 0],
+    ["广东", 22, 6, 0],
+    ["陕西", 26, 0, 0],
+    ["福建", 14, 0, 0],
+    ["浙江", 10, 0, 0]
+];
+
+// 十月十八号的疫情变化情况,确诊，治愈，死亡
+var data_rt_one = [24132, 23487, 4750];
+// 这个是控制原点大小
+var avg = 1000;
+// 这个是控制线条粗细
+var avglinks = 2000;
+
+var shengfen = [
+    ["香港", [5087, 105, 4827, 8, 20, 0, 155],
+        [5097, 105, 4837, 10, 10, 0, 155],
+        [5104, 105, 4843, 7, 6, 0, 156],
+        [5108, 105, 4849, 4, 6, 0, 154],
+        [5113, 105, 4861, 5, 12, 0, 147],
+        [5124, 105, 4864, 11, 3, 0, 155],
+        [5132, 105, 4875, 8, 11, 0, 152],
+        [5124, 105, 4885, 11, 10, 0, 134],
+        [5124, 105, 4890, 18, 5, 0, 129]
+    ],
+    ["上海", [1006, 7, 947, 7, 5, 0, 52]
+        [1007, 7, 950, 1, 3, 0, 50],
+        [1011, 7, 953, 4, 3, 0, 51],
+        [1012, 7, 955, 1, 2, 0, 50],
+        [1022, 7, 957, 10, 2, 0, 58],
+        [1024, 7, 958, 2, 1, 0, 59],
+        [1025, 7, 960, 1, 2, 0, 58],
+        [1030, 7, 966, 5, 6, 0, 57],
+        [1036, 7, 971, 6, 5, 0, 58],
+
+    ],
+    ["新疆", [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+        [902, 3, 899, 0, 0, 0, 0],
+    ],
+    ["四川", [693, 3, 663, 1, 3, 0, 27],
+        [696, 3, 663, 3, 0, 0, 30],
+        [698, 3, 663, 2, 0, 0, 32],
+        [701, 3, 663, 3, 0, 0, 35],
+        [704, 3, 663, 3, 0, 0, 38],
+        [707, 3, 664, 3, 1, 0, 40],
+        [710, 3, 665, 3, 1, 0, 42],
+        [713, 3, 665, 3, 0, 0, 45],
+        [713, 3, 668, 0, 3, 0, 42],
+    ],
+    ["台湾"
+
+    ],
+];
+
+// 数据储存模块结束
+
+
+var bingli = ['确诊病例', '康复病例', '死亡病例'];
 // 左侧可视化图表模块
-// 左一流图，全国数据——全国感染，全国治愈，全国死亡
+// 左一流图，全国数据—— 全国现存确诊，全国治愈，全国死亡
 var myChart_lt_one = echarts.init(document.getElementById('chart_lt_one'));
 (function() {
 
@@ -41,7 +128,7 @@ var myChart_lt_one = echarts.init(document.getElementById('chart_lt_one'));
         },
 
         legend: {
-            data: ['现有确诊', '现有治愈', '现有死亡'],
+            data: ['当日确诊', '当日治愈', '当日死亡'],
             textStyle: {
                 color: '#fff',
             },
@@ -92,71 +179,39 @@ var myChart_lt_one = echarts.init(document.getElementById('chart_lt_one'));
             },
             data: [
 
-                ['2020/11/08', 10, '现有确诊'],
-                ['2020/11/09', 15, '现有确诊'],
-                ['2020/11/10', 35, '现有确诊'],
-                ['2020/11/11', 38, '现有确诊'],
-                ['2020/11/12', 22, '现有确诊'],
-                ['2020/11/13', 16, '现有确诊'],
-                ['2020/11/14', 7, '现有确诊'],
-                ['2020/11/15', 2, '现有确诊'],
-                ['2020/11/16', 17, '现有确诊'],
-                ['2020/11/17', 33, '现有确诊'],
-                ['2020/11/18', 40, '现有确诊'],
-                ['2020/11/19', 32, '现有确诊'],
-                ['2020/11/20', 26, '现有确诊'],
-                ['2020/11/21', 35, '现有确诊'],
-                ['2020/11/22', 40, '现有确诊'],
-                ['2020/11/23', 32, '现有确诊'],
-                ['2020/11/24', 26, '现有确诊'],
-                ['2020/11/25', 22, '现有确诊'],
-                ['2020/11/26', 16, '现有确诊'],
-                ['2020/11/27', 22, '现有确诊'],
-                ['2020/11/28', 10, '现有确诊'],
+                ['2020/09/30', left_one_data[0][0], '当日确诊'],
+                ['2020/10/01', left_one_data[1][0], '当日确诊'],
+                ['2020/10/02', left_one_data[2][0], '当日确诊'],
+                ['2020/10/03', left_one_data[3][0], '当日确诊'],
+                ['2020/10/04', left_one_data[4][0], '当日确诊'],
+                ['2020/10/05', left_one_data[5][0], '当日确诊'],
+                ['2020/10/06', left_one_data[6][0], '当日确诊'],
+                ['2020/10/07', left_one_data[7][0], '当日确诊'],
+                ['2020/10/08', left_one_data[8][0], '当日确诊'],
 
-                ['2020/11/08', 10, '现有治愈'],
-                ['2020/11/09', 15, '现有治愈'],
-                ['2020/11/10', 35, '现有治愈'],
-                ['2020/11/11', 38, '现有治愈'],
-                ['2020/11/12', 22, '现有治愈'],
-                ['2020/11/13', 16, '现有治愈'],
-                ['2020/11/14', 7, '现有治愈'],
-                ['2020/11/15', 2, '现有治愈'],
-                ['2020/11/16', 17, '现有治愈'],
-                ['2020/11/17', 33, '现有治愈'],
-                ['2020/11/18', 40, '现有治愈'],
-                ['2020/11/19', 32, '现有治愈'],
-                ['2020/11/20', 26, '现有治愈'],
-                ['2020/11/21', 35, '现有治愈'],
-                ['2020/11/22', 4, '现有治愈'],
-                ['2020/11/23', 32, '现有治愈'],
-                ['2020/11/24', 26, '现有治愈'],
-                ['2020/11/25', 22, '现有治愈'],
-                ['2020/11/26', 16, '现有治愈'],
-                ['2020/11/27', 22, '现有治愈'],
-                ['2020/11/28', 10, '现有治愈'],
 
-                ['2020/11/08', 10, '现有死亡'],
-                ['2020/11/09', 15, '现有死亡'],
-                ['2020/11/10', 35, '现有死亡'],
-                ['2020/11/11', 38, '现有死亡'],
-                ['2020/11/12', 22, '现有死亡'],
-                ['2020/11/13', 16, '现有死亡'],
-                ['2020/11/14', 7, '现有死亡'],
-                ['2020/11/15', 2, '现有死亡'],
-                ['2020/11/16', 17, '现有死亡'],
-                ['2020/11/17', 33, '现有死亡'],
-                ['2020/11/18', 4, '现有死亡'],
-                ['2020/11/19', 32, '现有死亡'],
-                ['2020/11/20', 26, '现有死亡'],
-                ['2020/11/21', 35, '现有死亡'],
-                ['2020/11/22', 40, '现有死亡'],
-                ['2020/11/23', 32, '现有死亡'],
-                ['2020/11/24', 26, '现有死亡'],
-                ['2020/11/25', 22, '现有死亡'],
-                ['2020/11/26', 16, '现有死亡'],
-                ['2020/11/27', 22, '现有死亡'],
-                ['2020/11/28', 10, '现有死亡']
+
+                ['2020/09/30', left_one_data[0][1], '当日治愈'],
+                ['2020/10/01', left_one_data[1][1], '当日治愈'],
+                ['2020/10/02', left_one_data[2][1], '当日治愈'],
+                ['2020/10/03', left_one_data[3][1], '当日治愈'],
+                ['2020/10/04', left_one_data[4][1], '当日治愈'],
+                ['2020/10/05', left_one_data[5][1], '当日治愈'],
+                ['2020/10/06', left_one_data[6][1], '当日治愈'],
+                ['2020/10/07', left_one_data[7][1], '当日治愈'],
+                ['2020/10/08', left_one_data[8][1], '当日治愈'],
+
+
+                ['2020/09/30', left_one_data[0][2], '当日死亡'],
+                ['2020/10/01', left_one_data[1][2], '当日死亡'],
+                ['2020/10/02', left_one_data[2][2], '当日死亡'],
+                ['2020/10/03', left_one_data[3][2], '当日死亡'],
+                ['2020/10/04', left_one_data[4][2], '当日死亡'],
+                ['2020/10/05', left_one_data[5][2], '当日死亡'],
+                ['2020/10/06', left_one_data[6][2], '当日死亡'],
+                ['2020/10/07', left_one_data[7][2], '当日死亡'],
+                ['2020/10/08', left_one_data[8][2], '当日死亡'],
+
             ],
             label: {
                 show: false
@@ -213,20 +268,16 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 radius: ['10%', '40%'],
                 center: ['35%', '50%'],
                 data: [{
-                        value: 220,
+                        value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
                     }, {
-                        value: 120,
+                        value: (left_one_data[8][1] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[1]
                     },
                     {
-                        value: 189,
+                        value: (left_one_data[8][2] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[2]
                     },
-                    {
-                        value: 189,
-                        name: bingli[3]
-                    }
                 ],
                 label: {
                     show: false,
@@ -251,20 +302,16 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 radius: ['10%', '50%'],
                 center: ['35%', '50%'],
                 data: [{
-                        value: 220,
+                        value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
                     }, {
-                        value: 120,
+                        value: (left_one_data[8][1] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[1]
                     },
                     {
-                        value: 189,
+                        value: (left_one_data[8][2] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[2]
                     },
-                    {
-                        value: 189,
-                        name: bingli[3]
-                    }
                 ],
                 label: {
                     show: false,
@@ -289,20 +336,16 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 radius: ['10%', '60%'],
                 center: ['35%', '50%'],
                 data: [{
-                        value: 220,
+                        value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
                     }, {
-                        value: 120,
+                        value: (left_one_data[8][1] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[1]
                     },
                     {
-                        value: 189,
+                        value: (left_one_data[8][2] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[2]
                     },
-                    {
-                        value: 189,
-                        name: bingli[3]
-                    }
                 ],
                 label: {
                     show: false,
@@ -327,20 +370,16 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 radius: ['10%', '70%'],
                 center: ['35%', '50%'],
                 data: [{
-                        value: 220,
+                        value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
                     }, {
-                        value: 120,
+                        value: (left_one_data[8][1] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[1]
                     },
                     {
-                        value: 189,
+                        value: (left_one_data[8][2] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[2]
                     },
-                    {
-                        value: 189,
-                        name: bingli[3]
-                    }
                 ],
                 label: {
                     show: false,
@@ -363,20 +402,16 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 radius: ['10%', '80%'],
                 center: ['35%', '50%'],
                 data: [{
-                        value: 220,
+                        value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
                     }, {
-                        value: 120,
+                        value: (left_one_data[8][1] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[1]
                     },
                     {
-                        value: 189,
+                        value: (left_one_data[8][2] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[2]
                     },
-                    {
-                        value: 189,
-                        name: bingli[3]
-                    }
                 ],
                 label: {
                     normal: {
@@ -443,7 +478,7 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
         },
         yAxis: {
             type: 'value',
-            max: 1000,
+            max: 200,
             axisLabel: {
                 color: '#fff'
             },
@@ -455,7 +490,16 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
         },
         xAxis: {
             type: 'category',
-            data: ['福建', '广州', '厦门', '南宁', '背景', '长沙', '重庆', '上海'],
+            //前八省份
+            data: [left_three_data[0][0],
+                left_three_data[1][0],
+                left_three_data[2][0],
+                left_three_data[3][0],
+                left_three_data[4][0],
+                left_three_data[5][0],
+                left_three_data[6][0],
+                left_three_data[7][0]
+            ],
             axisLabel: {
                 color: '#fff'
             },
@@ -473,19 +517,28 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 itemStyle: {
                     normal: {
                         color: '#06d3cd',
-                        barBorderRadius: [20, 20, 0, 0],
+                        barBorderRadius: [0, 0, 0, 0],
                     }
                 },
                 label: {
                     normal: {
-                        show: true,
+                        show: false,
                         position: 'insideRight',
                         color: "#000",
-                        fontSize: 4
+                        fontSize: 6
                     }
                 },
                 z: 20,
-                data: [320, 302, 301, 334, 390, 330, 320, 320]
+                data: [
+                    left_three_data[0][1],
+                    left_three_data[1][1],
+                    left_three_data[2][1],
+                    left_three_data[3][1],
+                    left_three_data[4][1],
+                    left_three_data[5][1],
+                    left_three_data[6][1],
+                    left_three_data[7][1]
+                ],
             },
             {
                 name: '康复病例',
@@ -494,22 +547,31 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 itemStyle: {
                     normal: {
                         color: '#ebe806',
-                        shadowBlur: [0, 0, 0, 40],
+                        shadowBlur: [0, 0, 0, 0],
                         shadowColor: '#ebe806',
-                        barBorderRadius: [20, 20, 0, 0],
-                        shadowOffsetY: 5,
+                        barBorderRadius: [0, 0, 0, 0],
+                        shadowOffsetY: 0,
                     }
                 },
                 label: {
                     normal: {
-                        show: true,
+                        show: false,
                         position: 'insideRight',
                         color: "#000",
-                        fontSize: 4
+                        fontSize: 6
                     }
                 },
                 z: 15,
-                data: [120, 132, 101, 134, 90, 230, 210, 101]
+                data: [
+                    left_three_data[0][2],
+                    left_three_data[1][2],
+                    left_three_data[2][2],
+                    left_three_data[3][2],
+                    left_three_data[4][2],
+                    left_three_data[5][2],
+                    left_three_data[6][2],
+                    left_three_data[7][2]
+                ],
             },
             {
                 name: '死亡病例',
@@ -518,23 +580,32 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 itemStyle: {
                     normal: {
                         color: '#ff5624',
-                        barBorderRadius: [20, 20, 0, 0],
+                        barBorderRadius: [0, 0, 0, 0],
 
                         shadowBlur: [0, 0, 0, 40],
                         shadowColor: '#ff5624',
-                        shadowOffsetY: 5,
+                        shadowOffsetY: 0,
                     }
                 },
                 label: {
                     normal: {
-                        show: true,
+                        show: false,
                         position: 'insideRight',
                         color: "#000",
-                        fontSize: 4
+                        fontSize: 6
                     }
                 },
                 z: 10,
-                data: [220, 182, 191, 234, 290, 210, 310, 187]
+                data: [
+                    left_three_data[0][3],
+                    left_three_data[1][3],
+                    left_three_data[2][3],
+                    left_three_data[3][3],
+                    left_three_data[4][3],
+                    left_three_data[5][3],
+                    left_three_data[6][3],
+                    left_three_data[7][3]
+                ],
             },
             // {
             //     name: 'D级门店',
@@ -569,11 +640,11 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                     normal: {
                         color: '#ccc',
                         opacity: '0.2',
-                        barBorderRadius: [20, 20, 0, 0],
+                        barBorderRadius: [0, 0, 0, 0],
                     }
                 },
                 z: -10,
-                data: ['1000', '1000', '1000', '1000', '1000', '1000', '1000', '1000']
+                data: ['200', '200', '200', '200', '200', '200', '200', '200']
             }
         ]
     };
@@ -587,11 +658,9 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
 
 
 //右侧可视化图表模块
+// 右一
 var myChart_rt_one = echarts.init(document.getElementById('chart_rt_one'));
-var myChart_rt_one_bingli = ['确诊病例', '康复病例', '死亡病例'];
-var data_rt_one = [5000, 4000, 800];
-var avg = 200;
-var avglinks = 700;
+var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
 (function() {
 
     option = {
@@ -699,7 +768,7 @@ var avglinks = 700;
             data: [ //节点数据
                 {
                     name: myChart_rt_one_bingli[0],
-                    label: '确诊病例',
+                    label: '累计确诊病例',
                     value: data_rt_one[0],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[0],
@@ -714,7 +783,7 @@ var avglinks = 700;
                     },
                 }, {
                     name: myChart_rt_one_bingli[1],
-                    label: '康复病例',
+                    label: '累计康复病例',
                     value: data_rt_one[1],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[1],
@@ -729,7 +798,7 @@ var avglinks = 700;
                     },
                 }, {
                     name: myChart_rt_one_bingli[2],
-                    label: '死亡病例',
+                    label: '累计 死亡病例',
                     value: data_rt_one[2],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[2],
@@ -776,65 +845,67 @@ var avglinks = 700;
 
             links: [ //连线数据
                 {
+                    source: myChart_rt_one_bingli[1],
+                    target: myChart_rt_one_bingli[0],
+                    value: 0,
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: 0,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                },
+                {
+                    source: myChart_rt_one_bingli[1],
+                    target: myChart_rt_one_bingli[2],
+                    value: 0,
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: false,
+                            width: data_rt_one[2] / avglinks,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '0',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                },
+                {
                     source: myChart_rt_one_bingli[0],
                     target: myChart_rt_one_bingli[1],
+                    value: data_rt_one[1],
+                    label: '',
+                    lineStyle: {
+                        normal: {
+                            show: true,
+                            width: data_rt_one[1] / avglinks,
+                            color: 'source',
+                            curveness: 0.2,
+                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
+                            opacity: '1',
+                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                        },
+                    }
+
+                }, {
+                    source: myChart_rt_one_bingli[0],
+                    target: myChart_rt_one_bingli[2],
                     value: data_rt_one[2],
                     label: '',
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: data_rt_one[0] / avglinks,
-                            color: 'source',
-                            curveness: 0.2,
-                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
-                            opacity: '1',
-                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-                        },
-                    }
-
-                }, {
-                    source: myChart_rt_one_bingli[0],
-                    target: myChart_rt_one_bingli[2],
-                    value: '850',
-                    label: '',
-                    lineStyle: {
-                        normal: {
-                            show: true,
                             width: data_rt_one[2] / avglinks,
-                            color: 'source',
-                            curveness: 0.2,
-                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
-                            opacity: '1',
-                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-                        },
-                    }
-
-                }, {
-                    source: myChart_rt_one_bingli[1],
-                    target: myChart_rt_one_bingli[0],
-                    value: '950',
-                    label: '',
-                    lineStyle: {
-                        normal: {
-                            show: true,
-                            width: data_rt_one[1] / avglinks,
-                            color: 'source',
-                            curveness: 0.2,
-                            type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
-                            opacity: '1',
-                            // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
-                        },
-                    }
-
-                }, {
-                    source: myChart_rt_one_bingli[1],
-                    target: myChart_rt_one_bingli[2],
-                    value: '750',
-                    label: '',
-                    lineStyle: {
-                        normal: {
-                            show: true,
-                            width: data_rt_one[1] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -909,9 +980,11 @@ var avglinks = 700;
     });
 })();
 
+// 右二
 var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
 var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
-var myChart_rt_two_bingliNum = [1000, 1200, 1400, 1100, 900, 800];
+//三号到八号的数据
+var myChart_rt_two_bingliNum = [25, 24, 18, 23, 41, 11];
 var myChart_rt_two_bingliNum_yesterday = [];
 var gailu = myChart_rt_two_bingliNum[1] / myChart_rt_two_bingliNum[0];
 for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
@@ -921,7 +994,7 @@ for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
     gailu = myChart_rt_two_bingliNum[i] / myChart_rt_two_bingliNum[i - 1];
 
 }
-console.log(myChart_rt_two_bingliNum_yesterday);
+// console.log(myChart_rt_two_bingliNum_yesterday);
 (function() {
     var img = [
         "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABRCAYAAABFTSEIAAAACXBIWXMAAAsSAAALEgHS3X78AAAEp0lEQVR42u3cz4sjRRTA8W9Vd3Vn8mMmjj9WQWSRZQ+CsH+B7MnDIgiCd0E8CYJ/gOAIelo8ehUP/gF6WLw5/gMueFP2sIcF0dHd2Z1kknR11fOQZJJJMtlZd03H7HtQpNOTnpn+8Lrm1etmjIig8e/DKoECKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIqoAJudKTr+osZMNPvBUQBHwHsPF9fB9R0DeHMOQ6T6WOrhEzXBM4swDOL0M6CrArRVoq3t2dGUIb9fTvatg8ZZup1PDBgzPmy98mey6qfzjLz2WaWjEUZKEvGyi9nWyneMOvGIyFQo2Sbg4MUSChpU9IeTTUpJdsEajPZOJeJG5uBZj7rLLduWS5dGm6XNLEELOFUFj54ACJCaychkpDSASK3bwsXL0YgVpWJKwM0iy9Zy8HdGru7jvt3Pbu7w0wES7drTwAbjTHMGCsQcIAnYTC1/wRx0wEnl27JNgZI8HQ6Kc1mQq83RNzaMjPzXqDbjTQaJRFLxIyyMSxAXEkWrhrQzAAmo5HOjCQf7jflILxOkohL+aUPgV4vEGNJo+E5PAy02+UIMEwBxo0CPDP7Dg5SnEtpt1PA0e87XO25FOoh8IYIH2Y5b45RzGAQBiIltZoHxqMcjbksXAVgdc2EQMYzzzdotyeZWKuleULXJtwT4SODfC2QCWR+IF9KnjuX1Xbo99Op7LVE8iXlz0YBTk5SyLEEjo5OLuccEoFUvHfO+reuUPx4zftXAIcx1hdcF+/TvFab4A0Bs0VwqyhpVnkJT89/Q4DDQ0e77YCMwIUsFMeFZD856699URRvX4nxE4A/jbnxXp7v4Zw3ReGNSDHI8wFQjIafuoyn58L/fB6sth/Ybg9fez2TRC6QZcZYvgHsazF+MP7YCyLXcM7gvSXLDGBqYDg+NhwdmSpPoTrAkub0W+f4FSB1fDucIunMHSLpO8WAH0rSy8u+19MBCHB4OHzd2pI+CEUhpigEiN+l6WcdY252jLn5s7Wf472ImPcN8pUl/tEHoV4XWq1Ke4KrLmPsTA3oODpytFoOyJKSyzHyMSIxteWngMW5cSEdDJQUhTdZVgxOz3/+jFJm4+bA2e5JpNU6WZ4Fw99JwnWMKccwpeddP+B7GZTNUPKqybJy0O+Hs1YfMz9swwvpB8fbGDG0GuGkkK7V0hxSmZQpABI8l2z0v3sJf50qpAMJCd2qCulql3LD1lRGQjm7lEsDz0rkxTQOfiPPxUBcuJTbbhss/Y1eyi3NwsmKInmkZsKk5gtPUzNhvp11507CSy/X6XYStpvFudpZw1ZWIOF4Cq6SdtbKbioJyAhRTu3u9yMJXerN+ugvaQQsjcZ8Q3VnZwxlSDhe1lB9GjrSw5b+1avT8+Jw+979nNaOI6U3KpTrWAosxVQmygK4ld8X0ZtK/7eViExD7O1NQPb3T7fsl4/4sBpwYzPwjFbTo95Yl9l9Vd1YN1X/147HebSjary1AHyc5qc+XLQEQx9ve8Kg6xr6hKoCKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIq4JrHP8fEWV8FMTmOAAAAAElFTkSuQmCC",
@@ -964,7 +1037,7 @@ console.log(myChart_rt_two_bingliNum_yesterday);
         },
         xAxis: {
             type: "category",
-            data: ["21号", "22号", "23号", "24号", "25号", "26号"],
+            data: ["03号", "04号", "05号", "06号", "07号", "08号"],
             axisLine: {
                 lineStyle: {
                     color: "#999",
@@ -1131,6 +1204,21 @@ console.log(myChart_rt_two_bingliNum_yesterday);
 
 var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
 var myChart_rt_three_dengji = ['危险', '注意', '安全'];
+// var myChart_rt_three_level;
+var warm_level = 0;
+//预测的逻辑问题所以是减二
+var yesterday_num = (myChart_rt_two_bingliNum_yesterday.length - 2);
+var bingliNum_length = myChart_rt_two_bingliNum.length - 1;
+if (myChart_rt_two_bingliNum_yesterday[yesterday_num] > myChart_rt_two_bingliNum[bingliNum_length] * 1.5) {
+    warm_leve = 1;
+} else if (myChart_rt_two_bingliNum_yesterday[yesterday_num] > myChart_rt_two_bingliNum[bingliNum_length] * 2) {
+    warm_leve = 2;
+} else {
+    warm_leve = 0;
+}
+console.log(myChart_rt_two_bingliNum_yesterday[yesterday_num]);
+console.log(myChart_rt_two_bingliNum[bingliNum_length]);
+console.log(warm_leve);
 (function() {
     option = {
         // backgroundColor: {
@@ -1463,4 +1551,4 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
     window.addEventListener("resize", function() {
         myChart_md_one.resize();
     });
-})();
+})()

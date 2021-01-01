@@ -17,7 +17,9 @@ function time() {
     m = m < 10 ? '0' + m : m;
     var s = dt.getSeconds();
     s = s < 10 ? '0' + s : s;
-    document.querySelector(".showTime").innerHTML = y + "年" + mt + "月" + day + "日" + weekday + '&nbsp&nbsp' + h + ":" + m + ":" + s;
+    // document.querySelector(".showTime").innerHTML = y + "年" + mt + "月" + day + "日" + weekday + '&nbsp&nbsp' + h + ":" + m + ":" + s;
+    document.querySelector(".showTime").innerHTML = 2020 + "年" + 10 + "月" + 8 + "日" + "星期四" + '&nbsp&nbsp' + 22 + ":" + 15 + ":" + 47;
+
 }
 
 
@@ -26,7 +28,7 @@ function time() {
 
 
 //数据储存模块
-// 左一   循序，天数 新增确诊 当天治愈 当天死亡
+// 左一 顺序天数 新增确诊 当天治愈 当天死亡
 var left_one_data = [
     [21, 18, 0],
     [19, 15, 0],
@@ -40,7 +42,7 @@ var left_one_data = [
 ];
 
 // 十月八号当日 现存 + 康复 + 死亡 + 现存确诊，前八排序，用于左三
-var left_three_data = [
+var today18_num = [
     ["香港", 166, 5, 0],
     ["上海", 58, 5, 0],
     ["四川", 42, 3, 0],
@@ -51,8 +53,8 @@ var left_three_data = [
     ["浙江", 10, 0, 0]
 ];
 
-// 十月十八号的疫情变化情况,确诊，治愈，死亡
-var data_rt_one = [24132, 23487, 4750];
+// 十月十八号的疫情变化情况,累计确诊，累计治愈，累计死亡
+var LeiJi_num = [24132, 23487, 4750];
 // 这个是控制原点大小
 var avg = 1000;
 // 这个是控制线条粗细
@@ -253,7 +255,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
         },
         legend: {
             orient: 'vertical',
-            right: 8,
+            right: 2,
             top: 'center',
             textStyle: {
                 color: '#fff',
@@ -266,7 +268,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 z: 5,
                 roseType: 'radius',
                 radius: ['10%', '40%'],
-                center: ['35%', '50%'],
+                center: ['40%', '55%'],
                 data: [{
                         value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
@@ -279,11 +281,13 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                         name: bingli[2]
                     },
                 ],
+                minShowLabelAngle: 15,
                 label: {
                     show: false,
 
                 },
                 labelLine: {
+
                     lineStyle: {
                         color: '#fff'
                     }
@@ -300,7 +304,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 z: 4,
                 roseType: 'radius',
                 radius: ['10%', '50%'],
-                center: ['35%', '50%'],
+                center: ['40%', '55%'],
                 data: [{
                         value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
@@ -313,6 +317,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                         name: bingli[2]
                     },
                 ],
+                minShowLabelAngle: 15,
                 label: {
                     show: false,
 
@@ -334,7 +339,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 z: 3,
                 roseType: 'radius',
                 radius: ['10%', '60%'],
-                center: ['35%', '50%'],
+                center: ['40%', '55%'],
                 data: [{
                         value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
@@ -347,6 +352,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                         name: bingli[2]
                     },
                 ],
+                minShowLabelAngle: 15,
                 label: {
                     show: false,
 
@@ -368,7 +374,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 z: 2,
                 roseType: 'radius',
                 radius: ['10%', '70%'],
-                center: ['35%', '50%'],
+                center: ['40%', '55%'],
                 data: [{
                         value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
@@ -381,6 +387,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                         name: bingli[2]
                     },
                 ],
+                minShowLabelAngle: 15,
                 label: {
                     show: false,
 
@@ -400,7 +407,7 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                 z: 1,
                 roseType: 'radius',
                 radius: ['10%', '80%'],
-                center: ['35%', '50%'],
+                center: ['40%', '55%'],
                 data: [{
                         value: (left_one_data[8][0] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[0]
@@ -411,11 +418,12 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                     {
                         value: (left_one_data[8][2] / (left_one_data[8][0] + left_one_data[8][1] + left_one_data[8][2])).toFixed(2),
                         name: bingli[2]
-                    },
+                    }
                 ],
+                minShowLabelAngle: 0.00,
                 label: {
                     normal: {
-                        formatter: '{font|{c}}\n{hr|}\n{font|{d}%}',
+                        formatter: '{font|{b}}\n{hr|}\n{font|{d}%}',
                         rich: {
                             font: {
                                 fontSize: 8,
@@ -432,16 +440,19 @@ var myChart_lt_two = echarts.init(document.getElementById('chart_lt_two'));
                     },
                 },
                 labelLine: {
+                    length: 2,
                     lineStyle: {
-                        color: '#fff'
+                        color: '#fff',
                     }
                 },
                 itemStyle: {
                     shadowBlur: 10,
                     opacity: 1,
 
-                }
+                },
+
             }
+
         ]
     };
     // 3. 把配置项给实例对象
@@ -491,14 +502,14 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
         xAxis: {
             type: 'category',
             //前八省份
-            data: [left_three_data[0][0],
-                left_three_data[1][0],
-                left_three_data[2][0],
-                left_three_data[3][0],
-                left_three_data[4][0],
-                left_three_data[5][0],
-                left_three_data[6][0],
-                left_three_data[7][0]
+            data: [today18_num[0][0],
+                today18_num[1][0],
+                today18_num[2][0],
+                today18_num[3][0],
+                today18_num[4][0],
+                today18_num[5][0],
+                today18_num[6][0],
+                today18_num[7][0]
             ],
             axisLabel: {
                 color: '#fff'
@@ -530,14 +541,14 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 },
                 z: 20,
                 data: [
-                    left_three_data[0][1],
-                    left_three_data[1][1],
-                    left_three_data[2][1],
-                    left_three_data[3][1],
-                    left_three_data[4][1],
-                    left_three_data[5][1],
-                    left_three_data[6][1],
-                    left_three_data[7][1]
+                    today18_num[0][1],
+                    today18_num[1][1],
+                    today18_num[2][1],
+                    today18_num[3][1],
+                    today18_num[4][1],
+                    today18_num[5][1],
+                    today18_num[6][1],
+                    today18_num[7][1]
                 ],
             },
             {
@@ -563,14 +574,14 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 },
                 z: 15,
                 data: [
-                    left_three_data[0][2],
-                    left_three_data[1][2],
-                    left_three_data[2][2],
-                    left_three_data[3][2],
-                    left_three_data[4][2],
-                    left_three_data[5][2],
-                    left_three_data[6][2],
-                    left_three_data[7][2]
+                    today18_num[0][2],
+                    today18_num[1][2],
+                    today18_num[2][2],
+                    today18_num[3][2],
+                    today18_num[4][2],
+                    today18_num[5][2],
+                    today18_num[6][2],
+                    today18_num[7][2]
                 ],
             },
             {
@@ -597,14 +608,14 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
                 },
                 z: 10,
                 data: [
-                    left_three_data[0][3],
-                    left_three_data[1][3],
-                    left_three_data[2][3],
-                    left_three_data[3][3],
-                    left_three_data[4][3],
-                    left_three_data[5][3],
-                    left_three_data[6][3],
-                    left_three_data[7][3]
+                    today18_num[0][3],
+                    today18_num[1][3],
+                    today18_num[2][3],
+                    today18_num[3][3],
+                    today18_num[4][3],
+                    today18_num[5][3],
+                    today18_num[6][3],
+                    today18_num[7][3]
                 ],
             },
             // {
@@ -632,20 +643,20 @@ var myChart_lt_three = echarts.init(document.getElementById('chart_lt_three'));
             //     z: 5,
             //     data: [160, 152, 141, 274, 210, 110, 100, 187]
             // },
-            { // 灰色背景柱状图
-                type: 'bar',
-                barGap: '-100%',
-                barWidth: 15,
-                itemStyle: {
-                    normal: {
-                        color: '#ccc',
-                        opacity: '0.2',
-                        barBorderRadius: [0, 0, 0, 0],
-                    }
-                },
-                z: -10,
-                data: ['200', '200', '200', '200', '200', '200', '200', '200']
-            }
+            // { // 灰色背景柱状图
+            //     type: 'bar',
+            //     barGap: '-100%',
+            //     barWidth: 15,
+            //     itemStyle: {
+            //         normal: {
+            //             color: '#ccc',
+            //             opacity: '0',
+            //             barBorderRadius: [0, 0, 0, 0],
+            //         }
+            //     },
+            //     z: -10,
+            //     data: ['200']
+            // }
         ]
     };
     // 3. 把配置项给实例对象
@@ -684,31 +695,31 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                 return x.data.value; //设置提示框的内容和格式 节点和边都显示name属性
             },
         },
-        legend: [{
-            show: false,
-            orient: 'vertical',
-            x: 'right',
-            y: 'center',
-            itemWidth: 14,
-            itemHeight: 14,
-            textStyle: {
-                color: "rgba(255, 255, 255, 1)"
-            },
-            data: [ //节点数据
+        // legend: [{
+        //     show: false,
+        //     orient: 'vertical',
+        //     x: 'right',
+        //     y: 'center',
+        //     itemWidth: 14,
+        //     itemHeight: 14,
+        //     textStyle: {
+        //         color: "rgba(255, 255, 255, 1)"
+        //     },
+        //     data: [ //节点数据
 
-                {
-                    name: myChart_rt_one_bingli[0],
-                    icon: 'circle'
-                },
-                {
-                    name: myChart_rt_one_bingli[1],
-                    icon: 'circle'
-                }, {
-                    name: myChart_rt_one_bingli[2],
-                    icon: 'circle'
-                },
-            ],
-        }, ],
+        //         {
+        //             name: myChart_rt_one_bingli[0],
+        //             icon: 'circle'
+        //         },
+        //         {
+        //             name: myChart_rt_one_bingli[1],
+        //             icon: 'circle'
+        //         }, {
+        //             name: myChart_rt_one_bingli[2],
+        //             icon: 'circle'
+        //         },
+        //     ],
+        // }, ],
         // toolbox: {
         //     show: true, //是否显示工具箱
         //     feature: {
@@ -723,7 +734,7 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
             layout: 'force', // 'circular' ,force
             symbolSize: 100, //图形的大小（示例中的圆的大小）
             roam: true, //鼠标缩放及平移
-            focusNodeAdjacency: true, //是否在鼠标移到节点上的时候突出显示节点、节点的边和邻接节点
+            focusNodeAdjacency: false, //是否在鼠标移到节点上的时候突出显示节点、节点的边和邻接节点
             label: {
                 normal: {
                     show: true, //控制非高亮时节点名称是否显示
@@ -740,7 +751,7 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
             },
             force: {
                 x: 'center',
-                y: '50px',
+                y: 'center',
                 edgeLength: 120,
                 //repulsion: 8000
             },
@@ -769,10 +780,10 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                 {
                     name: myChart_rt_one_bingli[0],
                     label: '累计确诊病例',
-                    value: data_rt_one[0],
+                    value: LeiJi_num[0],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[0],
-                    symbolSize: data_rt_one[0] / avg,
+                    symbolSize: LeiJi_num[0] / avg,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
@@ -784,10 +795,10 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                 }, {
                     name: myChart_rt_one_bingli[1],
                     label: '累计康复病例',
-                    value: data_rt_one[1],
+                    value: LeiJi_num[1],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[1],
-                    symbolSize: data_rt_one[1] / avg,
+                    symbolSize: LeiJi_num[1] / avg,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
@@ -798,11 +809,11 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                     },
                 }, {
                     name: myChart_rt_one_bingli[2],
-                    label: '累计 死亡病例',
-                    value: data_rt_one[2],
+                    label: '累计死亡病例',
+                    value: LeiJi_num[2],
                     draggable: true, //能否鼠标拖动
                     category: myChart_rt_one_bingli[2],
-                    symbolSize: data_rt_one[2] / avg,
+                    symbolSize: LeiJi_num[2] / avg,
                     label: {
                         normal: {
                             show: true, //控制非高亮时节点名称是否显示
@@ -870,7 +881,7 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                     lineStyle: {
                         normal: {
                             show: false,
-                            width: data_rt_one[2] / avglinks,
+                            width: LeiJi_num[2] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -883,14 +894,14 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                 {
                     source: myChart_rt_one_bingli[0],
                     target: myChart_rt_one_bingli[1],
-                    value: data_rt_one[1],
+                    value: LeiJi_num[1],
                     label: '',
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: data_rt_one[1] / avglinks,
+                            width: LeiJi_num[1] / avglinks,
                             color: 'source',
-                            curveness: 0.2,
+                            curveness: -0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
                             opacity: '1',
                             // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
@@ -900,12 +911,12 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
                 }, {
                     source: myChart_rt_one_bingli[0],
                     target: myChart_rt_one_bingli[2],
-                    value: data_rt_one[2],
+                    value: LeiJi_num[2],
                     label: '',
                     lineStyle: {
                         normal: {
                             show: true,
-                            width: data_rt_one[2] / avglinks,
+                            width: LeiJi_num[2] / avglinks,
                             color: 'source',
                             curveness: 0.2,
                             type: 'solid', //线的类型 'solid'（实线）'dashed'（虚线）'dotted'（点线）
@@ -983,8 +994,8 @@ var myChart_rt_one_bingli = ['累计确诊', '累计康复', '累计死亡'];
 // 右二
 var myChart_rt_two = echarts.init(document.getElementById('chart_rt_two'));
 var myChart_rt_two_bingli = ['确诊病例', '预测未来确诊人数'];
-//三号到八号的数据
-var myChart_rt_two_bingliNum = [25, 24, 18, 23, 41, 11];
+//四号到八号的确诊数据
+var myChart_rt_two_bingliNum = [20, 25, 24, 18, 23, 41, 11];
 var myChart_rt_two_bingliNum_yesterday = [];
 var gailu = myChart_rt_two_bingliNum[1] / myChart_rt_two_bingliNum[0];
 for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
@@ -1037,7 +1048,7 @@ for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
         },
         xAxis: {
             type: "category",
-            data: ["03号", "04号", "05号", "06号", "07号", "08号"],
+            data: ["04号", "05号", "06号", "07号", "08号", "09号"],
             axisLine: {
                 lineStyle: {
                     color: "#999",
@@ -1091,13 +1102,11 @@ for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
                 symbol: img[1],
                 symbolSize: 80,
                 data: [
-                    myChart_rt_two_bingliNum_yesterday[0],
-                    myChart_rt_two_bingliNum_yesterday[1],
-                    myChart_rt_two_bingliNum_yesterday[2],
-                    myChart_rt_two_bingliNum_yesterday[3],
-                    myChart_rt_two_bingliNum_yesterday[4],
-                    myChart_rt_two_bingliNum_yesterday[5],
-
+                    myChart_rt_two_bingliNum[2],
+                    myChart_rt_two_bingliNum[3],
+                    myChart_rt_two_bingliNum[4],
+                    myChart_rt_two_bingliNum[5],
+                    myChart_rt_two_bingliNum[6],
                 ],
 
                 itemStyle: {
@@ -1130,13 +1139,13 @@ for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
                 symbol: img[3],
                 symbolSize: 80,
                 data: [
-
-                    myChart_rt_two_bingliNum[0],
-                    myChart_rt_two_bingliNum[1],
-                    myChart_rt_two_bingliNum[2],
-                    myChart_rt_two_bingliNum[3],
-                    myChart_rt_two_bingliNum[4],
-                    myChart_rt_two_bingliNum[5]
+                    myChart_rt_two_bingliNum_yesterday[0],
+                    myChart_rt_two_bingliNum_yesterday[1],
+                    myChart_rt_two_bingliNum_yesterday[2],
+                    myChart_rt_two_bingliNum_yesterday[3],
+                    myChart_rt_two_bingliNum_yesterday[4],
+                    myChart_rt_two_bingliNum_yesterday[5],
+                    myChart_rt_two_bingliNum_yesterday[6]
                 ],
 
                 itemStyle: {
@@ -1205,20 +1214,19 @@ for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
 var myChart_rt_three = echarts.init(document.getElementById('chart_rt_three'));
 var myChart_rt_three_dengji = ['危险', '注意', '安全'];
 // var myChart_rt_three_level;
-var warm_level = 0;
+var warm_level = [];
 //预测的逻辑问题所以是减二
 var yesterday_num = (myChart_rt_two_bingliNum_yesterday.length - 2);
 var bingliNum_length = myChart_rt_two_bingliNum.length - 1;
 if (myChart_rt_two_bingliNum_yesterday[yesterday_num] > myChart_rt_two_bingliNum[bingliNum_length] * 1.5) {
-    warm_leve = 1;
+    warm_level = [15, 10, 0];
 } else if (myChart_rt_two_bingliNum_yesterday[yesterday_num] > myChart_rt_two_bingliNum[bingliNum_length] * 2) {
-    warm_leve = 2;
+    warm_level = [15, 10, 5];
 } else {
-    warm_leve = 0;
+    warm_level = [15, 0, 0];
 }
 console.log(myChart_rt_two_bingliNum_yesterday[yesterday_num]);
 console.log(myChart_rt_two_bingliNum[bingliNum_length]);
-console.log(warm_leve);
 (function() {
     option = {
         // backgroundColor: {
@@ -1252,38 +1260,27 @@ console.log(warm_leve);
             }
         },
 
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c}%"
-        },
 
-        legend: {
-            data: [myChart_rt_three_dengji[0], myChart_rt_three_dengji[1], myChart_rt_three_dengji[2]],
-            x: 'center',
-            y: 'bottom',
-            textStyle: {
-                color: '#FFF'
-            }
-        },
+        // legend: {
+        //     data: [myChart_rt_three_dengji[0], myChart_rt_three_dengji[1], myChart_rt_three_dengji[2]],
+        //     x: 'center',
+        //     y: 'bottom',
+        //     textStyle: {
+        //         color: '#FFF'
+        //     }
+        // },
 
         color: ['#c2c1bd', '#00a1e5', '#23c768'],
 
         series: [
 
             {
-                name: 'TIT',
                 type: 'funnel',
                 left: 'center',
                 width: '70%',
-                bottom: '30',
+                bottom: '10',
                 top: '25',
                 sort: 'ascending',
-                label: {
-                    normal: {
-                        formatter: '{b}',
-                    },
-
-                },
                 labelLine: {
                     normal: {
                         show: true,
@@ -1300,14 +1297,14 @@ console.log(warm_leve);
                 },
 
                 data: [{
-                        value: 5,
+                        value: 10,
                         name: myChart_rt_three_dengji[0]
                     }, {
-                        value: 10,
+                        value: 50,
                         name: myChart_rt_three_dengji[1]
                     },
                     {
-                        value: 15,
+                        value: 100,
                         name: myChart_rt_three_dengji[2]
                     },
                 ]
@@ -1317,25 +1314,25 @@ console.log(warm_leve);
                 name: 'TIT',
                 type: 'funnel',
                 left: 'center',
-                bottom: '30',
+                bottom: '10',
                 top: '25',
                 width: '70%',
                 maxSize: '70%',
                 sort: 'ascending',
-                label: {
-                    normal: {
-                        position: 'inside',
-                        formatter: '{c}%',
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 14,
-                        }
-                    },
-                    emphasis: {
-                        position: 'inside',
-                        formatter: '{b}: {c}%'
-                    }
-                },
+                // label: {
+                //     normal: {
+                //         position: 'inside',
+                //         formatter: '{c}%',
+                //         textStyle: {
+                //             color: '#fff',
+                //             fontSize: 14,
+                //         }
+                //     },
+                //     emphasis: {
+                //         position: 'inside',
+                //         formatter: '{b}: {c}%'
+                //     }
+                // },
                 itemStyle: {
                     normal: {
                         opacity: 08,
@@ -1349,15 +1346,15 @@ console.log(warm_leve);
                 },
 
                 data: [{
-                        value: 5,
-                        name: myChart_rt_three_dengji[0]
+                        value: warm_level[2],
+                        name: ''
                     }, {
-                        value: 10,
-                        name: myChart_rt_three_dengji[1]
+                        value: warm_level[1],
+                        name: ''
                     },
                     {
-                        value: 15,
-                        name: myChart_rt_three_dengji[2]
+                        value: warm_level[0],
+                        name: ''
                     },
 
                 ]
@@ -1374,13 +1371,12 @@ console.log(warm_leve);
 
 //右侧可视化图表模块结束
 
-
 // 中间地图
 var myChart_md_one = echarts.init(document.querySelector('.chart'));
 (function() {
     option = {
         title: {
-            text: '中国疫情图',
+            text: '现存疫情图',
             left: 'center',
             top: '80',
             textStyle: {
@@ -1393,21 +1389,22 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['中国疫情图']
+            data: ['现存疫情图']
         },
         visualMap: {
             type: 'piecewise',
             left: '35',
-            bottom: '45',
+            bottom: '0',
             textStyle: {
                 color: "rgba(255, 255, 255, 1)"
             },
             pieces: [
                 { min: 1000, max: 1000000, label: '大于等于1000人', color: '#372a28' },
-                { min: 500, max: 999, label: '确诊500-999人', color: '#4e160f' },
-                { min: 100, max: 499, label: '确诊100-499人', color: '#974236' },
-                { min: 10, max: 99, label: '确诊10-99人', color: '#ee7263' },
-                { min: 1, max: 9, label: '确诊1-9人', color: '#f5bba7' },
+                { min: 500, max: 999, label: '现存500-999人', color: '#4e160f' },
+                { min: 100, max: 499, label: '现存100-499人', color: '#974236' },
+                { min: 10, max: 99, label: '现存10-99人', color: '#ee7263' },
+                { min: 1, max: 9, label: '现存1-9人', color: '#f5bba7' },
+                { min: 0, max: 0, label: '现存0人', color: '#cccccc' }
             ],
             color: ['#E0022B', '#E09107', '#A3E00B']
         },
@@ -1431,7 +1428,7 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
             }
         },
         series: [{
-            name: '确诊数',
+            name: '现存感染人数',
             type: 'map',
             mapType: 'china',
             top: '70',
@@ -1442,106 +1439,106 @@ var myChart_md_one = echarts.init(document.querySelector('.chart'));
             },
             data: [{
                 name: '北京',
-                value: 212
+                value: 0
             }, {
                 name: '天津',
-                value: 60
+                value: 4
             }, {
                 name: '上海',
-                value: 208
+                value: 58
             }, {
                 name: '重庆',
-                value: 337
-            }, {
-                name: '河北',
-                value: 126
-            }, {
-                name: '河南',
-                value: 675
-            }, {
-                name: '云南',
-                value: 117
-            }, {
-                name: '辽宁',
-                value: 74
-            }, {
-                name: '黑龙江',
-                value: 155
-            }, {
-                name: '湖南',
-                value: 593
-            }, {
-                name: '安徽',
-                value: 480
-            }, {
-                name: '山东',
-                value: 270
-            }, {
-                name: '新疆',
-                value: 29
-            }, {
-                name: '江苏',
-                value: 308
-            }, {
-                name: '浙江',
-                value: 829
-            }, {
-                name: '江西',
-                value: 476
-            }, {
-                name: '湖北',
-                value: 13522
-            }, {
-                name: '广西',
-                value: 139
-            }, {
-                name: '甘肃',
-                value: 55
-            }, {
-                name: '山西',
-                value: 74
-            }, {
-                name: '内蒙古',
-                value: 34
-            }, {
-                name: '陕西',
-                value: 142
-            }, {
-                name: '吉林',
-                value: 42
-            }, {
-                name: '福建',
-                value: 179
-            }, {
-                name: '贵州',
-                value: 56
-            }, {
-                name: '广东',
-                value: 797
-            }, {
-                name: '青海',
-                value: 15
-            }, {
-                name: '西藏',
                 value: 1
             }, {
-                name: '四川',
-                value: 282
+                name: '河北',
+                value: 1
             }, {
-                name: '宁夏',
-                value: 34
+                name: '河南',
+                value: 4
             }, {
-                name: '海南',
-                value: 79
+                name: '云南',
+                value: 9
             }, {
-                name: '台湾',
+                name: '辽宁',
+                value: 3
+            }, {
+                name: '黑龙江',
+                value: 0
+            }, {
+                name: '湖南',
+                value: 0
+            }, {
+                name: '安徽',
+                value: 0
+            }, {
+                name: '山东',
+                value: 2
+            }, {
+                name: '新疆',
+                value: 0
+            }, {
+                name: '江苏',
+                value: 3
+            }, {
+                name: '浙江',
                 value: 10
             }, {
+                name: '江西',
+                value: 0
+            }, {
+                name: '湖北',
+                value: 0
+            }, {
+                name: '广西',
+                value: 3
+            }, {
+                name: '甘肃',
+                value: 0
+            }, {
+                name: '山西',
+                value: 3
+            }, {
+                name: '内蒙古',
+                value: 6
+            }, {
+                name: '陕西',
+                value: 26
+            }, {
+                name: '吉林',
+                value: 0
+            }, {
+                name: '福建',
+                value: 14
+            }, {
+                name: '贵州',
+                value: 0
+            }, {
+                name: '广东',
+                value: 22
+            }, {
+                name: '青海',
+                value: 0
+            }, {
+                name: '西藏',
+                value: 0
+            }, {
+                name: '四川',
+                value: 42
+            }, {
+                name: '宁夏',
+                value: 0
+            }, {
+                name: '海南',
+                value: 0
+            }, {
+                name: '台湾',
+                value: 30
+            }, {
                 name: '香港',
-                value: 15
+                value: 16
             }, {
                 name: '澳门',
-                value: 9
+                value: 0
             }]
         }]
     };

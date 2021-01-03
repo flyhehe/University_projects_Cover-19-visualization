@@ -11,8 +11,10 @@ body {
   overflow: hidden;
 }
 html {
+  font-size: 18.75px;
   overflow-x: hidden;
   background: url(../img/bg/bg.jpg) no-repeat center center;
+  background-image: 100% 100%;
 }
 /* 声明字体*/
 @font-face {

@@ -1065,7 +1065,7 @@ for (var i = 1; i <= myChart_rt_two_bingliNum.length; i++) {
             type: "value",
             // min: 300,
             // max: 850,
-            name: "人数/千",
+            name: "人数/个",
             splitLine: {
                 show: true,
                 lineStyle: {
